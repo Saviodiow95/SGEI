@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} Editais {% endblock %}
+
+{% block content %}
+    <div class="row">
+        
+
+        {%for edital in edital_list%}
+            <p>{{edital.titulo}}</p>
+        {%endfor%}
+    </div>
+
+{% endblock %}

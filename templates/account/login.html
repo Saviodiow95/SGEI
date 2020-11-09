@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} Login {% endblock %}
+
+{% block content %}
+   <div id="centraliza">
+    <div class="row">
+        <div class="col s12 m4 offset-m4">
+            <div class="card-panel white">
+                <div class="card-action ">
+                    <img src="{% static 'img/ifnmg_horizontal_png.png' %}" width="50%" alt="">
+                </div>
+                <form method="post">
+
+                    {% csrf_token %}
+
+                    <div>
+                        <input type="hidden" name="next" value="{{ next }}"> {% form form=form %} {% endform %}
+
+                        <button type="submit" class="btn green" style="width: 100%;">Entrar</button>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
