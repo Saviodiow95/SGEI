@@ -2,15 +2,24 @@
 {% load static %}
 {% load material_form %}
 
-{% block title %} Editais {% endblock %}
+{% block title %} Inscrições {% endblock %}
 
 {% block content %}
     <div class="row">
-        
-
-        {%for inscricao in inscricao_list%}
-            <p>{{inscricao.user.username}}</p>
-        {%endfor%}
+        <table class="highlight">
+            <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Edital</th>
+            </tr>
+            </thead>
+            {%for inscricao in inscricao_list%}
+                <tr>
+                    <td>{{inscricao.user.username}}</td>
+                    <td>{{inscricao.edital}}</td>
+                </tr>
+            {%endfor%}
+        </table>
     </div>
 
 {% endblock %}
