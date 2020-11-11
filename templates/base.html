@@ -12,8 +12,8 @@
 
     <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-   <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+   <!-- Material-django CSS -->
+  {% include 'material/includes/material_css.html' %}
 
     <!--css personalizado-->
     <link rel="stylesheet" href="{% static '/css/styles.css'%}">
@@ -25,29 +25,9 @@
         <nav class="green darken-4">
             <div class="container">
                 <div class="nav-wrapper">
-                    <a href="#!" class="brand-logo"><img class="logo" src="{% static 'img/logo.png' %}" alt="LOGO"></a>
+                    <a href="#!" class="brand-logo"><img src="{%static '/img/logo.png'%}" width="40px" alt="Logo"></a>
                     <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-                    <ul class="right hide-on-med-and-down">
-                        <li><a href="#">Home</a></li>
-                        <li><a href="#" class="dropdown-trigger" data-target='dropControle'>Menu 1</a></li>
-                        <li><a href="#">Menu 2</a></li>
-                        <!--Perfil-->
-                        {% if user.is_authenticated %}
-                        <li><a href="#" class="dropdown-trigger" data-coverTrigger='false' data-target='dropPerfil'>
-                                {% if user.foto %}
-                                <img class="circle " align="Absmiddle" height="35px" src="/media/{{user.foto}}">
-                                {% else %}
-                                <img class="circle " align="Absmiddle" height="35px" src="{% static '/img/user.png' %}">
-                                {% endif %}
 
-                                <span class="perfil-margin">{{user.username}}</span>
-                                <i class="material-icons right">expand_more</i>
-                            </a>
-                        </li>
-                        {% else%}
-                        <li><a href="#"><i class="material-icons left">account_box</i>Entrar</a></li>
-                        {% endif %}
-                    </ul>
                 </div>
             </div>
         </nav>
@@ -95,13 +75,14 @@
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 
-   <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-
+   <!-- Material-django JavaScript -->
+    {% include 'material/includes/material_js.html' %}
     <!--js personalizado-->
-    <script src="{% static '/js/scripts.js' %}" ></script>
+    <script src="{% static '/js/scripts.js' %}" >
 
-    {% block stript %}{%endblocl%}
+    </script><script src="{% static '/js/jquery.formset.js' %}" ></script>
+
+    {% block scripts %}{%endblock%}
 
 </body>
 

@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} Editais {% endblock %}
+
+{% block content %}
+    <<div class="row container">
+        <h4 class="center">Novo Edital</h4>
+        <form method="post" class="col s12 ">
+            {% csrf_token %}
+
+            <div class="input-field col s12 l6 offset-l3" >
+
+                {% form form=form %}{% endform %}
+
+                {% for pergunta in formPerguntas%}
+                    <div class="inlineform">
+                        {% form form=pergunta %}{% endform %}
+
+                    </div>
+                {%endfor %}
+
+                <br><br><br><br><br>
+                <button type="submit" class="btn">Salvar</button>
+            </div>
+        </form>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+<script type="text/javascript">
+    $(function() {
+        $('.inlineform').formset({
+            prefix: '{{ form_Pergunta.prefix }}',
+            addText: '  <i class="material-icons">add</i> Adicionar novo Pergunta ',
+            deleteText: '  <br><i class="material-icons">remove</i> Remover este Pergunta',
+        });
+    })
+</script>
+{% endblock scripts %}
