@@ -7,14 +7,17 @@
 {% block content %}
     <<div class="row container">
         <h4 class="center">Novo Edital</h4>
-        <form method="post" class="col s12 ">
+        <form method="post" enctype="multipart/form-data" class="col s12 ">
             {% csrf_token %}
 
             <div class="input-field col s12 l6 offset-l3" >
 
                 {% form form=form %}{% endform %}
 
-                {% for pergunta in formPerguntas%}
+
+                {{form_Perguntas.management_form}}
+
+                {% for pergunta in form_Perguntas%}
                     <div class="inlineform">
                         {% form form=pergunta %}{% endform %}
 

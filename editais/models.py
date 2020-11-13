@@ -2,12 +2,6 @@ from django.db import models
 from accounts.models import User
 
 
-
-
-
-
-
-
 class Edital(models.Model):
 
     STATUS_CHOICE = (
@@ -18,6 +12,7 @@ class Edital(models.Model):
 
     titulo = models.CharField(max_length=100)
     descricao = models.TextField()
+    arquivo = models.FileField(upload_to='editais', null=True, blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, default='ab')
 
     # ---- Campos para controle de datas de criação e edição ----
@@ -34,8 +29,8 @@ class Edital(models.Model):
 class Pergunta(models.Model):
     edital = models.ForeignKey(Edital, on_delete=models.CASCADE)
     descricao = models.TextField()
-    is_aberta = models.BooleanField(default=False)
-    has_arquivo = models.BooleanField(default=False)
+    is_aberta = models.BooleanField(default=False, null=True)
+    has_arquivo = models.BooleanField(default=False, null=True)
 
     # ---- Campos para controle de datas de criação e edição ----
     created_at = models.DateTimeField(auto_now_add=True)
