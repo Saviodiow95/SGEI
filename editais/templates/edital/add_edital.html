@@ -5,41 +5,39 @@
 {% block title %} Editais {% endblock %}
 
 {% block content %}
-    <<div class="row container">
+    <div class="row ">
         <h4 class="center">Novo Edital</h4>
         <form method="post" enctype="multipart/form-data" class="col s12 ">
             {% csrf_token %}
 
-            <div class="input-field col s12 l6 offset-l3" >
-
-                {% form form=form %}{% endform %}
+            {% form form=form %}{% endform %}
 
 
-                {{form_Perguntas.management_form}}
+            {{form_Perguntas.management_form}}
 
-                {% for pergunta in form_Perguntas%}
-                    <div class="inlineform">
-                        {% form form=pergunta %}{% endform %}
+            {% for pergunta in form_Perguntas%}
+                <div class="inlineform">
+                    {% form form=pergunta %}{% endform %}
 
-                    </div>
-                {%endfor %}
+                </div>
+            {%endfor %}
 
-                <br><br><br><br><br>
-                <button type="submit" class="btn">Salvar</button>
-            </div>
+            <br><br><br><br><br>
+            <button type="submit" class="btn">Salvar</button>
+
         </form>
     </div>
 
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript">
-    $(function() {
-        $('.inlineform').formset({
-            prefix: '{{ form_Pergunta.prefix }}',
-            addText: '  <i class="material-icons">add</i> Adicionar novo Pergunta ',
-            deleteText: '  <br><i class="material-icons">remove</i> Remover este Pergunta',
-        });
-    })
-</script>
+    <script type="text/javascript">
+        $(function() {
+            $('.inlineform').formset({
+                prefix: '{{ form_Pergunta.prefix }}',
+                addText: '  <i class="material-icons">add</i> Adicionar novo Pergunta ',
+                deleteText: '  <br><i class="material-icons">remove</i> Remover este Pergunta',
+            });
+        })
+    </script>
 {% endblock scripts %}

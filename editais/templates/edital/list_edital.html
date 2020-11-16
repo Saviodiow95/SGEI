@@ -14,11 +14,13 @@
             <div class="col s12 m6">
                 <div class="card grey darken-1">
                     <div class="card-content white-text">
-                        <span class="card-title">{{edital.titulo}}</span>
+                        <a href="{% url 'editais:edital_view' edital.id %}">
+                            <span class="card-title">{{edital.titulo}}</span>
+                        </a>
                         <p >{{edital.descricao|linebreaks|truncatewords:10}}</p>
                     </div>
                     <div class="card-action">
-                        <a href="#"><i class="material-icons">edit</i> Editar</a>
+                        <a href="{% url 'editais:edital_edit' edital.id %}"><i class="material-icons">edit</i> Editar</a>
                         <a href="#modal_{{edital.id}}" class="modal-trigger "><i class="material-icons ">delete</i> Apagar</a>
                     </div>
                 </div>
