@@ -21,55 +21,56 @@
 </head>
 
 <body>
-    <div class="row">
-        <div class="col-m3">
-            <header></header>
-
-            <ul  class="sidenav sidenav-fixed green darken-4">
-
-                <li>
-                    <div class="user-view">
-                        <div class="background">
-                            <img src="/static/img/fundo.jpg">
-                        </div>
-                        {% if user.is_authenticated %}
-                        {% if user.foto %}
-                        <a href="#user"><img class="circle" src="/media/{{user.foto}}"></a>
-                        {% else %}
-                        <a href="#user"><img class="circle" src="/static/img/user.png"></a>
-                        {% endif %}
-
-                        <a href="#name"><span class="white-text name">{{user.username}}</span></a>
-                        <a href="#email"><span class="white-text email">{{user.first_name}}</span></a>
-                        <a href="#email"><span class="white-text email">{{user.email}}</span></a>
-                        {% else %}
-                        <a href="#user"><img class="circle" src="/static/img/user.png"></a>
-                        <a href="#name"><span class="white-text name">SCA</span></a>
-                        <a href="{% url 'account_login' %}"><span class="white-text email">Entrar</span></a>
-                        {% endif %}
-
+    <header>
+        <ul  class="sidenav sidenav-fixed green darken-4">
+            <li>
+                <div class="user-view">
+                    <div class="background">
+                        <img src="/static/img/fundo.jpg">
                     </div>
-                </li>
-                <li class="divider green" tabindex="-1"></li>
-                <li><a href="{% url 'core:home' %}">Home</a></li>
-                <li class="divider green" tabindex="-1"></li>
-                <li><a href="{% url 'editais:edital_list' %}">Editais</a></li>
-                <li class="divider green" tabindex="-1"></li>
-                <li><a href="#">Inscrições</a></li>
-                <li class="divider green" tabindex="-1"></li>
-                <li><a href="{% url 'account_logout' %}">Sair</a></li>
+                    {% if user.is_authenticated %}
+                    {% if user.foto %}
+                    <a href="#user"><img class="circle" src="/media/{{user.foto}}"></a>
+                    {% else %}
+                    <a href="#user"><img class="circle" src="/static/img/user.png"></a>
+                    {% endif %}
+
+                    <a href="#name"><span class="white-text name">{{user.username}}</span></a>
+                    <a href="#email"><span class="white-text email">{{user.first_name}}</span></a>
+                    <a href="#email"><span class="white-text email">{{user.email}}</span></a>
+                    {% else %}
+                    <a href="#user"><img class="circle" src="/static/img/user.png"></a>
+                    <a href="#name"><span class="white-text name">SCA</span></a>
+                    <a href="{% url 'account_login' %}"><span class="white-text email">Entrar</span></a>
+                    {% endif %}
+
+                </div>
+            </li>
+            <li class="divider green" tabindex="-1"></li>
+            <li><a href="{% url 'core:home' %}">Home</a></li>
+            <li class="divider green" tabindex="-1"></li>
+            <li><a href="{% url 'editais:edital_list' %}">Editais</a></li>
+            <li class="divider green" tabindex="-1"></li>
+            <li><a href="{% url 'editais:inscricao_list' %}">Inscrições</a></li>
+            <li class="divider green" tabindex="-1"></li>
+            <li><a href="{% url 'account_logout' %}">Sair</a></li>
 
 
-            </ul>
+        </ul>
 
-        </div>
-        <div class="col offset-l3">
+    </header>
+
+
+    <div class="container">
+
+
+        <main>
             {% block content %}{% endblock %}
-        </div>
+        </main>
+
 
 
     </div>
-
 
 
 

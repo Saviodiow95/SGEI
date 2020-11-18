@@ -3,10 +3,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 
 
-from .forms import EditalForm, PerguntaForm
-from .models import Edital, Inscricao, Pergunta
-
-
+from .forms import EditalForm, PerguntaForm, AlternativaForm
+from .models import Edital, Inscricao, Pergunta, Alternativa
 
 
 #Edital área
@@ -32,8 +30,7 @@ def edital_add(request):
         form = EditalForm(request.POST or None, request.FILES or None, instance=edital, prefix='edital')
         pergunta_form = form_Pergunta_factory(request.POST or None, request.FILES or None, instance=edital, prefix='perguntas')
 
-        print('---------')
-        print(request)
+
 
         if form.is_valid() and pergunta_form.is_valid():
             form = form.save(commit=False)
@@ -59,8 +56,7 @@ def  edital_edit(request, id):
 
     if request.method == 'POST':
         form = EditalForm(request.POST or None, request.FILES or None, instance=edital, prefix='edital')
-        pergunta_form = form_Pergunta_factory(request.POST or None, request.FILES or None, instance=edital,
-                                              prefix='perguntas')
+        pergunta_form = form_Pergunta_factory(request.POST or None, request.FILES or None, instance=edital, prefix='perguntas')
 
         print('---------')
         print(request)
@@ -92,7 +88,43 @@ def edital_delete(request, id):
 
 
 
+#------------------- Perguntas ---------------------
 
+def pergunta_add(request, id_edital):
+    form_alternativa_factory = inlineformset_factory(Pergunta, Alternativa, form=AlternativaForm, extra=1)
+
+    edital = get_object_or_404(Edital, pk=id_edital)
+    pergunta = Pergunta()
+    pergunta.edital = edital
+    context = {}
+
+    if request.method == 'POST':
+
+
+        form = PerguntaForm(request.POST or None, request.FILES or None, instance=pergunta, prefix='pergunta')
+        alternativa_form = form_alternativa_factory(request.POST or None, request.FILES or None, instance=pergunta,
+                                                    prefix='alternativa')
+
+
+        if form.is_valid() and alternativa_form.is_valid():
+            form = form.save(commit=False)
+            form.save()
+            alternativa_form.save()
+
+            return redirect('editais:edital_view',id =edital.id)
+        else:
+            context['edital'] = edital
+            context['form'] = PerguntaForm(request.POST or None, request.FILES or None, instance=pergunta,
+                                           prefix='pergunta')
+            context['form_alternativa'] = form_alternativa_factory(request.POST or None, request.FILES or None,
+                                                                   instance=pergunta, prefix='alternativa')
+
+    else:
+        context['edital'] = edital
+        context['form'] = PerguntaForm(instance=pergunta, prefix='pergunta')
+        context['form_alternativa'] = form_alternativa_factory(instance=pergunta, prefix='alternativa')
+
+    return render(request, 'pergunta/add_pergunta.html', context)
 
 
 
@@ -107,8 +139,13 @@ class InscricaolList(ListView):
     template_name = 'inscricao/list_inscricao.html'
     model = Inscricao
 
-class InscricaoDetailView(DetailView):
-    model = Inscricao
+def inscricao_view(request, id):
+    context = {}
+    inscricao= get_object_or_404(Inscricao, pk=id)
+
+    context['inscricao'] = inscricao
+
+    return render(request,'inscricao/view_inscricao.html',context)
 
 
 

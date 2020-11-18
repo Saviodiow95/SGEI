@@ -12,7 +12,7 @@ class PerguntaForm(forms.ModelForm):
 
     class Meta:
         model = Pergunta
-        fields = '__all__'
+        fields = ('descricao','is_aberta','has_arquivo')
 
     layout = Layout('descricao',
                     Row('is_aberta','has_arquivo')
@@ -29,6 +29,7 @@ class RespostaForm(forms.ModelForm):
     class Meta:
         model = Resposta
         fields = '__all__'
+
 
 
 class EditalForm(forms.ModelForm):

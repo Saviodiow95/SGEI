@@ -6,19 +6,36 @@
 
 {% block content %}
     <div class="row">
-        <table class="highlight">
+        <table class="striped responsive-table" >
             <thead>
-            <tr>
-                <th>Usuario</th>
-                <th>Edital</th>
-            </tr>
+              <tr>
+                  <th>Id</th>
+                  <th>Aluno</th>
+                  <th>Edital</th>
+                  <th>Situação</th>
+                  <th>Opções</th>
+              </tr>
             </thead>
+            <tbody>
             {%for inscricao in inscricao_list%}
-                <tr>
-                    <td>{{inscricao.user.username}}</td>
-                    <td>{{inscricao.edital}}</td>
-                </tr>
+                 <tr>
+                     <td>{{inscricao.id}}</td>
+                     <td>{{inscricao.user.first_name}}</td>
+                     <td>{{inscricao.edital.titulo}}</td>
+                     {%if inscricao.status == "an"%}
+                        <td class = " yellow accent-2">{{inscricao.get_status_display}}</td>
+                     {%endif%}
+                     {%if inscricao.status == "ap"%}
+                        <td class=" teal lighten-1">{{inscricao.get_status_display}}</td>
+                     {%endif%}
+                     {%if inscricao.status == "re"%}
+                        <td class = " red darken-3">{{inscricao.get_status_display}}</td>
+                     {%endif%}
+
+                    <td><a href="#" class="orange-text"> Avaliar </a></td>
+                  </tr>
             {%endfor%}
+            </tbody>
         </table>
     </div>
 
