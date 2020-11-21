@@ -167,7 +167,12 @@ def pergunta_edit(request, id):
     return render(request, 'pergunta/edit_pergunta.html', context)
 
 
+def pergunta_delete(request, id):
+    pergunta = get_object_or_404(Pergunta, pk=id)
+    edital = pergunta.edital
+    pergunta.delete()
 
+    return redirect('editais:edital_view',id =edital.id)
 
 
 

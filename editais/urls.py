@@ -1,7 +1,8 @@
 from django.urls import path, include
 
-from .views import EditalListDetails, EditalList, edital_view, InscricaolList, edital_add, edital_delete, edital_edit, inscricao_view, \
-    pergunta_add, pergunta_edit
+from .views import EditalListDetails, EditalList, edital_view, InscricaolList, edital_add, edital_delete, edital_edit, \
+    inscricao_view, \
+    pergunta_add, pergunta_edit, pergunta_delete
 
 app_name='editais'
 urlpatterns = [
@@ -19,7 +20,7 @@ urlpatterns = [
     #----------------Pergunta-------------------
     path('add/pergunta/<int:id_edital>', pergunta_add, name="pergunta_add"),
     path('edit/pergunta/<int:id>', pergunta_edit, name="pergunta_edit"),
-
+    path('delete/pergunta/<int:id>', pergunta_delete, name='pergunta_delete'),
 
 
     #----------------Incrições-------------------

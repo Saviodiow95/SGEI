@@ -10,21 +10,30 @@
             <div class="card-content">
                 <span class="card-title">{{edital.titulo}}</span>
                 <a href="{%url 'editais:edital_edit' edital.id %}" class="btn btn-editar right">Editar</a>
-                <a href="{%url 'editais:pergunta_add' edital.id %}" class="btn right">Nova Pergunta</a>
+                <a href="{%url 'editais:pergunta_add' edital.id %}" class="btn btn-novo right">Nova Pergunta</a>
                 <b>Descrição :</b> <p>{{edital.descricao|linebreaks}}</p>
 
                 <b>Perguntas :</b>
+                <ul class="collapsible">
                 {% for per in perguntas %}
-                <a href="{% url 'editais:pergunta_edit' per.id%}">
-                   <p>{{per.descricao}}</p>
-                </a>
-                <p>----Alternativas----</p>
-                {% for alt in per.alternativa_set.all%}
-                    <p>{{alt.descricao}}</p>
+                    <li>
+                        <div class="collapsible-header">
+                            <i class="material-icons">filter_drama</i>
+                            {{per.descricao}}
 
+                        </div>
+                        <div class="collapsible-body">
+                            <span><b>Alternativas</b></span>
+                            <div class="right">
+                                <a href="{%url 'editais:pergunta_edit' edital.id %}" class="btn btn-editar right">Editar</a>
+                                <a href="{%url 'editais:pergunta_delete' edital.id %}" class="btn btn-deletar right">Excluir</a>
+                            </div>
+                            {% for alt in per.alternativa_set.all%}
+                                <p>{{alt.descricao}}</p>
+                            {%endfor%}
+                        </div>
+                    </li>
                 {%endfor%}
-                <p>-----------------</p>
-            {%endfor%}
 
             </div>
         </div>
