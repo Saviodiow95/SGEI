@@ -16,7 +16,7 @@ urlpatterns = [
     path('alunos/edital/list/', EditalList.as_view(), name='edital_list_inscri'),
 
 
-    #----------------Edital-------------------
+    #----------------Pergunta-------------------
     path('add/pergunta/<int:id_edital>', pergunta_add, name="pergunta_add"),
     path('edit/pergunta/<int:id>', pergunta_edit, name="pergunta_edit"),
 

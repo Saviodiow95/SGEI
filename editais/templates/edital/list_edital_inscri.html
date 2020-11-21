@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} Editais {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h4>Lista de Editais</h4>
+
+
+        <ul class="collapsible popout">
+            {%for edital in edital_list%}
+                <li>
+                {%if edital.get_status_display == 'Finalizado'%}
+                    <div class="collapsible-header "><i class="material-icons">format_list_bulleted</i>{{edital.titulo}}
+                        <span class="red-text">&nbsp&nbsp&nbsp (Encerrado)</span>
+                    </div>
+
+                {%else%}
+                    <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{edital.titulo}}</div>
+
+                {%endif%}
+                    <div class="collapsible-body">
+                        <span>{{edital.descricao|truncatewords:5}}</span>
+                        <a href="#" class="btn right">Mais Detelhes</a>
+
+                    </div>
+
+                </li>
+            {%endfor%}
+        </ul>
+
+
+
+
+
+    </div>
+
+{% endblock %}

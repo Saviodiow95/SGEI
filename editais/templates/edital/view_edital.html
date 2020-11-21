@@ -9,6 +9,8 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-title">{{edital.titulo}}</span>
+                <a href="{%url 'editais:edital_edit' edital.id %}" class="btn btn-editar right">Editar</a>
+                <a href="{%url 'editais:pergunta_add' edital.id %}" class="btn right">Nova Pergunta</a>
                 <b>Descrição :</b> <p>{{edital.descricao|linebreaks}}</p>
 
                 <b>Perguntas :</b>
