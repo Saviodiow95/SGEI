@@ -6,44 +6,62 @@
 
 {% block content %}
     <div class="row">
-        
-
-        {%for edital in edital_list%}
-
-
-            <div class="col s12 m6">
-                <div class="card grey darken-1">
-                    <div class="card-content white-text">
-                        <a href="{% url 'editais:edital_view' edital.id %}">
-                            <span class="card-title">{{edital.titulo}}</span>
-                        </a>
-                        <p >{{edital.descricao|linebreaks|truncatewords:10}}</p>
-                    </div>
-                    <div class="card-action">
-                        <a href="{% url 'editais:edital_edit' edital.id %}"><i class="material-icons">edit</i> Editar</a>
-                        <a href="#modal_{{edital.id}}" class="modal-trigger "><i class="material-icons ">delete</i> Apagar</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Modal para confirmar a exclusão -->
-            <div id="modal_{{edital.id}}" class="modal">
-                <div class="modal-content">
-                    <h4>Deseja realmente excluir esse edital?</h4>
-                    <p>Titulo: <span>{{edital.titulo}}</span></p>
-                    <p>Descrição: <span>{{edital.descricao}}</span></p>
-
-                </div>
-                <div class="modal-footer">
-                    <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-                    <a href="{% url 'editais:edital_delete' edital.id %}" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
-                </div>
-            </div>
+        <h4>Lista de Editais</h4>
 
 
 
+        <table class="highlight centered">
+            <thead>
+              <tr>
+                  <th>Titulo</th>
+                  <th>descrição</th>
+                  <th>Incrições</th>
+                  <th>Status</th>
+                  <th>Opções</th>
+              </tr>
+            </thead>
 
-        {%endfor%}
+            <tbody>
+                {%for edital in edital_list%}
+                    <tr>
+
+
+                        <td>
+                            <a href="{% url 'editais:edital_view' edital.id %}">
+                                <span class="card-title">{{edital.titulo}}</span>
+                            </a>
+                        </td>
+                        <td> <p >{{edital.descricao|truncatewords:5}}</p> </td>
+                        <td> <p >{{edital.inscricao_set.count}}</p> </td>
+                        <td> <p >{{edital.get_status_display}}</p> </td>
+                        <td class="card-action">
+                            <a href="{% url 'editais:edital_edit' edital.id %}" class="btn btn-editar"><i class="material-icons">edit</i> Editar</a>&nbsp
+                            <a href="#modal_{{edital.id}}" class="modal-trigger btn btn-deletar"><i class="material-icons ">delete</i> Apagar</a>
+                        </td>
+
+
+
+
+                        <!-- Modal para confirmar a exclusão -->
+                        <div id="modal_{{edital.id}}" class="modal">
+                            <div class="modal-content">
+                                <h4>Deseja realmente excluir esse edital?</h4>
+                                <p>Titulo: <span>{{edital.titulo}}</span></p>
+                                <p>Descrição: <span>{{edital.descricao}}</span></p>
+
+                            </div>
+                            <div class="modal-footer">
+                                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                                <a href="{% url 'editais:edital_delete' edital.id %}" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
+                            </div>
+                        </div>
+
+
+
+                    </tr>
+                {%endfor%}
+            </tbody>
+        </table>
     </div>
 
 {% endblock %}

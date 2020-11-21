@@ -16,6 +16,47 @@ header, main, footer {
 
 }
 
+/*Collapsible*/
+.encerrado{
+    background-color: #757575
+}
+
+
+
+
+/*Botões*/
+
+.btn{
+    margin: 10px;
+    font-weight: bold;
+    
+}
+
+.btn-editar{
+    background-color: #ffeb3b;
+    
+}
+
+.btn-deletar{
+    background-color: #f44336;
+   
+}
+
+.btn-salvar{
+    
+    background-color: #4caf50 ;
+}
+
+
+
+
+/*main*/
+main{
+
+}
+
+
+
 
 footer{
     margin-top: 100px;

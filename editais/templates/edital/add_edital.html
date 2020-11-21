@@ -23,7 +23,10 @@
             {%endfor %}
 
             <br><br><br><br><br>
-            <button type="submit" class="btn">Salvar</button>
+            <div class="right">
+                <a href="{% url 'editais:edital_list' %}" class="btn btn-deletar">Cancelar</a>
+                <button type="submit" class="btn btn-salvar">Salvar</button>
+            </div>
 
         </form>
     </div>

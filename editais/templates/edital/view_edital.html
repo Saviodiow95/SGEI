@@ -6,16 +6,26 @@
 
 {% block content %}
     <div class="row">
-        {{edital.titulo}}
-        <p>{{edital.descricao}}</p>
-        {% for per in perguntas %}
-            <p>{{per.descricao}}</p>
-            {% for alt in per.alternativa_set.all%}
-                <p>{{alt.descricao}}</p>
+        <div class="card">
+            <div class="card-content">
+                <span class="card-title">{{edital.titulo}}</span>
+                <b>Descrição :</b> <p>{{edital.descricao|linebreaks}}</p>
 
+                <b>Perguntas :</b>
+                {% for per in perguntas %}
+                <a href="{% url 'editais:pergunta_edit' per.id%}">
+                   <p>{{per.descricao}}</p>
+                </a>
+                <p>----Alternativas----</p>
+                {% for alt in per.alternativa_set.all%}
+                    <p>{{alt.descricao}}</p>
+
+                {%endfor%}
+                <p>-----------------</p>
             {%endfor%}
-            <p>-----------------</p>
-        {%endfor%}
+
+            </div>
+        </div>
 
     </div>
 

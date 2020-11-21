@@ -1,6 +1,11 @@
 $(document).ready(function () {
 
-  $('.modal').modal();
+    $('.modal').modal();
+
+    $(document).ready(function(){
+        $('.collapsible').collapsible();
+    });
+
 
 });
 

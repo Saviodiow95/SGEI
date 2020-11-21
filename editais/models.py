@@ -12,8 +12,9 @@ class Edital(models.Model):
 
     titulo = models.CharField(max_length=100)
     descricao = models.TextField()
-    arquivo = models.FileField(upload_to='editais', null=True, blank=True)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, default='ab')
+    banner = models.ImageField(upload_to='editais/banner', null=True, blank=True)
+    arquivo = models.FileField(upload_to='editais/pdf', null=True, blank=True)
 
     # ---- Campos para controle de datas de criação e edição ----
     created_at = models.DateTimeField(auto_now_add=True)

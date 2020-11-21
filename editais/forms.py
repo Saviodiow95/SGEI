@@ -33,13 +33,11 @@ class RespostaForm(forms.ModelForm):
 
 
 class EditalForm(forms.ModelForm):
-
     class Meta:
         model = Edital
         fields = '__all__'
 
-    layout = Layout('titulo','descricao','status',
-                    Row(Fieldset('Perguntas')))
+
 
 class InscricaoForm(forms.ModelForm):
     class Meta:
