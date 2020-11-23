@@ -34,6 +34,12 @@
 
                 {%endif%}
 
+                {%if pergunta.has_arquivo == True%}
+                    <input type="file" id="arquivo-{{pergunta.id}}">
+
+                {%endif%}
+
+
 
                 </div>
                 {%endfor%}

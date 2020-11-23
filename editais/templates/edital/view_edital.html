@@ -25,8 +25,8 @@
                         <div class="collapsible-body">
                             <span><b>Alternativas</b></span>
                             <div class="right">
-                                <a href="{%url 'editais:pergunta_edit' edital.id %}" class="btn btn-editar right">Editar</a>
-                                <a href="{%url 'editais:pergunta_delete' edital.id %}" class="btn btn-deletar right">Excluir</a>
+                                <a href="{%url 'editais:pergunta_edit' per.id %}" class="btn btn-editar right">Editar</a>
+                                <a href="{%url 'editais:pergunta_delete' per.id %}" class="btn btn-deletar right">Excluir</a>
                             </div>
                             {% for alt in per.alternativa_set.all%}
                                 <p>{{alt.descricao}}</p>
