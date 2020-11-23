@@ -10,12 +10,12 @@ from .models import Edital, Inscricao, Pergunta, Alternativa
 #Edital área
 
 # administração
-class EditalListDetails(ListView):
+class EditalListAdm(ListView):
     template_name = 'edital/list_edital.html'
     model = Edital
 
 
-def edital_view(request, id):
+def edital_view_adm(request, id):
     context = {}
     edital= get_object_or_404(Edital, pk=id)
     perguntas = edital.pergunta_set.all()
@@ -88,7 +88,11 @@ class EditalList(ListView):
     template_name = 'edital/list_edital_inscri.html'
     model = Edital
 
-
+def edital_view(request, id):
+    context = {}
+    edital= get_object_or_404(Edital, pk=id)
+    context['edital'] = edital
+    return render(request,'edital/view_edital_inscri.html',context)
 
 
 
