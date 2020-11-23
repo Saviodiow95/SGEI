@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} Incrição {% endblock %}
+
+{% block content %}
+    <div class="card">
+        <span class="card-title">Nova Inscrição</span>
+
+        <div class="card-content">
+            <form method="post" enctype="multipart/form-data" >
+                {%csrf_token%}
+                <div class="input-field col s12 " >
+                    <input id="edital_titulo" type="text" name="edital_titulo" value="{{edital.titulo}}" readonly>
+                    <label for="edital_titulo">Edital</label>
+                </div>
+
+                {%for pergunta in edital.pergunta_set.all%}
+                <div class="input-field col s12 " >
+
+                {%if pergunta.is_aberta == True%}
+                    <input type="text" id="pergunta-{{pergunta.id}}">
+                    <label for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
+
+                {%else%}
+                    <select>
+                        <option value="" disabled selected>Escolha uma Opção</option>
+                        {%for alternativa in pergunta.alternativa_set.all%}
+                            <option value="{{alternativa.id}}">{{alternativa.descricao}}</option>
+                        {%endfor%}
+                    </select>
+                    <label>{{pergunta.descricao}}</label>
+
+                {%endif%}
+
+
+                </div>
+                {%endfor%}
+
+
+                <a href="#" class="btn btn-deletar ">Cancelar</a>
+                <button type="submit" class="btn btn-salvar " >Salvar</button>
+
+
+            </form>
+        </div>
+
+    </div>
+
+
+{% endblock %}

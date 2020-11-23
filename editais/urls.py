@@ -2,7 +2,7 @@ from django.urls import path, include
 
 from .views import EditalListAdm, EditalList, edital_view_adm, InscricaolList, edital_add, edital_delete, edital_edit, \
     inscricao_view, edital_view, \
-    pergunta_add, pergunta_edit, pergunta_delete
+    pergunta_add, pergunta_edit, pergunta_delete, inscricao_do
 
 app_name='editais'
 urlpatterns = [
@@ -28,4 +28,6 @@ urlpatterns = [
     path('inscricao/', InscricaolList.as_view(), name='inscricao_list'),
     path('view/inscricao/<int:id>', inscricao_view, name='inscricao_view'),
 
+
+    path('inscricao/do/<int:id_edital>', inscricao_do, name='inscricao_do'),
 ]

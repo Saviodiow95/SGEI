@@ -8,7 +8,7 @@
     <div class="row ">
         <h4 class="center">Nova Pergunta</h4>
 
-        <form method="post" enctype="multipart/form-data" class="col s12 ">
+        <form method="post" enctype="multipart/form-data" >
             {% csrf_token %}
             <input type="hidden" name="edital_id" value="{{edital.id}}">
             <div class="row">
