@@ -103,7 +103,7 @@ def edital_view(request, id):
 #------------------- Perguntas ---------------------
 
 def pergunta_add(request, id_edital):
-    form_alternativa_factory = inlineformset_factory(Pergunta, Alternativa, form=AlternativaForm, extra=1)
+    form_alternativa_factory = inlineformset_factory(Pergunta, Alternativa, form=AlternativaForm)
 
     edital = get_object_or_404(Edital, pk=id_edital)
     pergunta = Pergunta()
@@ -138,7 +138,7 @@ def pergunta_add(request, id_edital):
 
 
 def pergunta_edit(request, id):
-    form_alternativa_factory = inlineformset_factory(Pergunta, Alternativa, form=AlternativaForm, extra=1)
+    form_alternativa_factory = inlineformset_factory(Pergunta, Alternativa, form=AlternativaForm)
     pergunta = get_object_or_404(Pergunta, pk=id)
     edital = pergunta.edital
 
@@ -200,6 +200,8 @@ def inscricao_do(request,id_edital):
     context = {}
     edital = get_object_or_404(Edital, pk=id_edital)
     context['edital'] = edital
+    if(request.method == 'POST'):
+        print(request.POST)
 
 
 

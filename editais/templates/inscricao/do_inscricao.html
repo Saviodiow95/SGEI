@@ -20,11 +20,11 @@
                 <div class="input-field col s12 " >
 
                 {%if pergunta.is_aberta == True%}
-                    <input type="text" id="pergunta-{{pergunta.id}}">
+                    <input type="text" id="pergunta-{{pergunta.id}}" name="pergunta-{{pergunta.id}}">
                     <label for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
 
                 {%else%}
-                    <select>
+                    <select name="pergunta-{{pergunta.id}}">
                         <option value="" disabled selected>Escolha uma Opção</option>
                         {%for alternativa in pergunta.alternativa_set.all%}
                             <option value="{{alternativa.id}}">{{alternativa.descricao}}</option>
@@ -35,7 +35,18 @@
                 {%endif%}
 
                 {%if pergunta.has_arquivo == True%}
-                    <input type="file" id="arquivo-{{pergunta.id}}">
+
+
+
+                    <div class="file-field input-field">
+                        <div class="btn">
+                            <span>File</span>
+                            <input type="file" id="arquivo-{{pergunta.id}}">
+                        </div>
+                        <div class="file-path-wrapper">
+                            <input class="file-path validate" type="text">
+                        </div>
+                    </div>
 
                 {%endif%}
 

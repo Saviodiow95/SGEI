@@ -9,7 +9,13 @@
         <div class="card">
             <div class="card-content">
                 <span class="card-title">{{edital.titulo}}</span>
-                <b>Descrição :</b> <p>{{edital.descricao|linebreaks}}</p>
+
+                {%if edital.arquivo != None%}
+                    <b>Arquivo: </b> <a href="#"><i class="material-icons ">picture_as_pdf</i></a>
+                {%endif%}
+
+
+                <p><b>Descrição :</b></p> <p>{{edital.descricao|linebreaks}}</p>
                 <a href="{% url 'editais:inscricao_do' edital.id %}" class="btn right button">Inscriver-se</a>
 
 
