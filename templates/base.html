@@ -23,11 +23,11 @@
 
 <body>
     <header>
-        <ul  class="sidenav sidenav-fixed green darken-3">
+        <ul  class="sidenav sidenav-fixed green darken-3 ">
             <li>
                 <div class="user-view">
                     <div class="background">
-                        <img src="/static/img/fundo.jpg">
+
                     </div>
                     {% if user.is_authenticated %}
                     {% if user.foto %}
@@ -48,7 +48,7 @@
                 </div>
             </li>
             <li class="divider green" tabindex="-1"></li>
-            <li><a href="{% url 'core:home' %}">Home</a></li>
+            <li ><a href="{% url 'core:home' %}">Home</a></li>
             <li class="divider green" tabindex="-1"></li>
             <li><a href="{% url 'editais:edital_list' %}">Editais</a></li>
             <li class="divider green" tabindex="-1"></li>

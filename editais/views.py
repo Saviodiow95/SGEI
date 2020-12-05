@@ -4,7 +4,7 @@ from django.views.generic import DetailView, ListView
 
 
 from .forms import EditalForm, PerguntaForm, AlternativaForm
-from .models import Edital, Inscricao, Pergunta, Alternativa
+from .models import Edital, Inscricao, Pergunta, Alternativa, Resposta
 
 
 #Edital área
@@ -197,13 +197,34 @@ def inscricao_view(request, id):
 
 
 def inscricao_do(request,id_edital):
+
     context = {}
+    respostas = {}
     edital = get_object_or_404(Edital, pk=id_edital)
     context['edital'] = edital
+    inscricao = Inscricao()
+    inscricao.edital = edital
+    inscricao.user = request.user
     if(request.method == 'POST'):
-        print(request.POST)
 
 
+        inscricao.save()
+        for pergunta in edital.pergunta_set.all():
+            aux = request.POST.get('pergunta-' + str(pergunta.id))
+            resp = Resposta(inscricao=inscricao)
+
+            if pergunta.is_aberta:
+                resp.resposta_aberta = aux
+            else:
+                alt = Alternativa.objects.get(id=16)
+                resp.alternativa = alt
+
+            if pergunta.has_arquivo:
+
+                arq = request.FILE.get('arquivo-' + str(pergunta.id))
+                resp.arquivo = arq
+
+            #resp.save()
 
 
     return render(request, 'inscricao/do_inscricao.html', context)

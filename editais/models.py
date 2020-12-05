@@ -53,7 +53,7 @@ class Alternativa(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return str(self.id)
+        return str(self.descricao)
 
     class Meta:
         verbose_name_plural = "Alternativa"
@@ -70,7 +70,7 @@ class Inscricao(models.Model):
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     edital = models.ForeignKey(Edital, on_delete=models.CASCADE)
-    status = models.CharField(max_length=2, choices=STATUS_CHOICE, default='ab')
+    status = models.CharField(max_length=2, choices=STATUS_CHOICE, default='an')
 
     # ---- Campos para controle de datas de criação e edição ----
     created_at = models.DateTimeField(auto_now_add=True)
@@ -85,7 +85,7 @@ class Inscricao(models.Model):
 
 class Resposta(models.Model):
     inscricao = models.ForeignKey(Inscricao, on_delete=models.CASCADE)
-    alternativa = models.ForeignKey(Alternativa, on_delete=models.CASCADE)
+    alternativa = models.ForeignKey(Alternativa, on_delete=models.CASCADE, null=True, blank=True)
     arquivo = models.FileField(upload_to='inscricoes', null=True, blank=True)
     resposta_aberta = models.TextField(null=True, blank=True)
 
@@ -99,3 +99,5 @@ class Resposta(models.Model):
     class Meta:
         verbose_name_plural = "Resposta"
         verbose_name = "Respostas"
+
+

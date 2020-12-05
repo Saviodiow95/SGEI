@@ -22,7 +22,7 @@
 
                 {%endif%}
                     <div class="collapsible-body">
-                        <span>{{edital.descricao|truncatewords:5}}</span>
+                        <span>{{edital.descricao|truncatewords:20}}</span>
                         <a href="{%url 'editais:edital_view_inscri' edital.id%}" class="btn right">Mais Detelhes</a>
 
                     </div>
