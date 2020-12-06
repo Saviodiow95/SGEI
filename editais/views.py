@@ -216,7 +216,7 @@ def inscricao_do(request,id_edital):
             if pergunta.is_aberta:
                 resp.resposta_aberta = aux
             else:
-                alt = Alternativa.objects.get(id=16)
+                alt = Alternativa.objects.get(id=int(aux))
                 resp.alternativa = alt
 
             if pergunta.has_arquivo:
