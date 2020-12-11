@@ -23,20 +23,7 @@
                     <input type="text" id="pergunta-{{pergunta.id}}" name="pergunta-{{pergunta.id}}" required>
                     <label for="pergunta-{{pergunta.id}}">{{pergunta.descricao}}</label>
 
-                {%else%}
-                    <select name="pergunta-{{pergunta.id}}" required>
-                        <option value="" disabled selected>Escolha uma Opção</option>
-                        {%for alternativa in pergunta.alternativa_set.all%}
-                            <option value="{{alternativa.id}}">{{alternativa.descricao}}</option>
-                        {%endfor%}
-                    </select>
-                    <label>{{pergunta.descricao}}</label>
-
-                {%endif%}
-
-                {%if pergunta.has_arquivo == True%}
-
-
+                {%elif pergunta.has_arquivo == True%}
 
                     <div class="file-field input-field">
                         <div class="btn">
@@ -48,7 +35,19 @@
                         </div>
                     </div>
 
+
+                {%else%}
+                    <select name="pergunta-{{pergunta.id}}" required>
+                        <option value="" disabled selected>Escolha uma Opção</option>
+                        {%for alternativa in pergunta.alternativa_set.all%}
+                            <option value="{{alternativa.id}}">{{alternativa.descricao}}</option>
+                        {%endfor%}
+                    </select>
+                    <label>{{pergunta.descricao}}</label>
+
                 {%endif%}
+
+
 
 
 

@@ -65,7 +65,6 @@ class Inscricao(models.Model):
         ('ap', 'Aprovado'),
         ('re', 'Reprovado'),
         ('an', 'Analise'),
-        ('fn', 'Finalizda')
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

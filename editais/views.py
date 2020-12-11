@@ -2,6 +2,7 @@ from django.forms import inlineformset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 
+from django.core.files.storage import FileSystemStorage
 
 from .forms import EditalForm, PerguntaForm, AlternativaForm
 from .models import Edital, Inscricao, Pergunta, Alternativa, Resposta
@@ -206,7 +207,7 @@ def inscricao_do(request,id_edital):
     inscricao.edital = edital
     inscricao.user = request.user
     if(request.method == 'POST'):
-
+        fs = FileSystemStorage()
 
         inscricao.save()
         for pergunta in edital.pergunta_set.all():
@@ -215,16 +216,18 @@ def inscricao_do(request,id_edital):
 
             if pergunta.is_aberta:
                 resp.resposta_aberta = aux
+            elif pergunta.has_arquivo:
+                nome_arq = 'arquivo-' + str(pergunta.id)
+                arq = request.FILES[nome_arq]
+                resp.arquivo = fs.save(arq.name, arq)
+                print(request.FILES)
+
             else:
                 alt = Alternativa.objects.get(id=int(aux))
                 resp.alternativa = alt
 
-            if pergunta.has_arquivo:
 
-                arq = request.FILE.get('arquivo-' + str(pergunta.id))
-                resp.arquivo = arq
-
-            #resp.save()
+            resp.save()
 
 
     return render(request, 'inscricao/do_inscricao.html', context)

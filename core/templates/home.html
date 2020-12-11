@@ -1,9 +1,84 @@
-{% extends 'base.html' %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="shortcut icon" href=" {% static '/img/favicon.ico' %}" />
+
+    <title>{% block title %}{% endblock %}</title>
+
+    <!--Import Google Icon Font-->
+      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+   <!-- Material-django CSS -->
+  {% include 'material/includes/material_css.html' %}
 
 
-{% block title %} Home {% endblock %}
+    <!--css personalizado-->
+    <link rel="stylesheet" href="{% static '/css/styles.css'%}">
 
-{% block content %}
-<br><br><br><br><br><br><br><br><br><br><br><br>
+</head>
 
-{% endblock %}
+<body>
+    <header>
+        <nav class="white">
+            <div class="nav-wrappe">
+                <ul class="right hide-on-med-and-down">
+                    <li>
+                        <a href="{% url 'account_login' %}" class="">Entrar</a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+
+    <div class="container">
+
+
+        <main>
+
+            <br>s
+            <br>ss
+            <br>sss
+            <br>ssss
+            <br>sssss
+            <br>ssssss
+            <br>sssssss
+            <br>ssssss
+            <br>sssss
+            <br>ssss
+            <br>sss
+            <br>ss
+            <br>s
+        </main>
+
+
+
+    </div>
+
+
+
+
+
+
+
+    <!--JQuery-->
+
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+
+   <!-- Material-django JavaScript -->
+    {% include 'material/includes/material_js.html' %}
+    <!--js personalizado-->
+    <script src="{% static '/js/scripts.js' %}" >
+
+    </script><script src="{% static '/js/jquery.formset.js' %}" ></script>
+
+    {% block scripts %}{%endblock%}
+
+</body>
+
+</html>
