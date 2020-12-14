@@ -13,6 +13,7 @@
                   <th>Aluno</th>
                   <th>Edital</th>
                   <th>Situação</th>
+                  <th>Pontos</th>
                   <th>Opções</th>
               </tr>
             </thead>
@@ -31,7 +32,7 @@
                      {%if inscricao.status == "re"%}
                         <td class = " red darken-3">{{inscricao.get_status_display}}</td>
                      {%endif%}
-
+                     <td>{{inscricao.nivel}}</td>
                     <td><a href="#" class="blue-text"> Avaliar </a></td>
                   </tr>
             {%endfor%}

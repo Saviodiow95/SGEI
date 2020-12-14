@@ -1,3 +1,5 @@
+
+
 from django.db import models
 from accounts.models import User
 
@@ -47,7 +49,7 @@ class Pergunta(models.Model):
 class Alternativa(models.Model):
     pergunta = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
     descricao = models.TextField()
-    peso = models.IntegerField()
+    peso = models.IntegerField(default=0)
     # ---- Campos para controle de datas de criação e edição ----
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -74,6 +76,22 @@ class Inscricao(models.Model):
     # ---- Campos para controle de datas de criação e edição ----
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    def nivel(self):
+        respostas = list(self.resposta_set.all())
+
+        pontos = 0
+        print(respostas)
+        for resp in respostas:
+            print(resp)
+            if resp.alternativa != None  and \
+                    resp.alternativa != None:
+
+                pontos += resp.alternativa.peso
+
+        return pontos
+
+
 
     def __str__(self):
         return "Aluno " +self.user.first_name + " Numerode inscrição " + str(self.id)
