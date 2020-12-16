@@ -33,7 +33,7 @@
                         <td class = " red darken-3">{{inscricao.get_status_display}}</td>
                      {%endif%}
                      <td>{{inscricao.nivel}}</td>
-                    <td><a href="#" class="blue-text"> Avaliar </a></td>
+                    <td><a href="{% url 'editais:inscricao_view' inscricao.id %}" class="blue-text"> Avaliar </a></td>
                   </tr>
             {%endfor%}
             </tbody>

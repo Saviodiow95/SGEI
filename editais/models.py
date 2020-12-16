@@ -102,6 +102,7 @@ class Inscricao(models.Model):
 
 class Resposta(models.Model):
     inscricao = models.ForeignKey(Inscricao, on_delete=models.CASCADE)
+    pergunta = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
     alternativa = models.ForeignKey(Alternativa, on_delete=models.CASCADE, null=True, blank=True)
     arquivo = models.FileField(upload_to='inscricoes', null=True, blank=True)
     resposta_aberta = models.TextField(null=True, blank=True)

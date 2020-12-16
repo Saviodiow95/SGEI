@@ -184,6 +184,7 @@ def pergunta_delete(request, id):
 
 
 #Inscrição área
+
 class InscricaolList(ListView):
     template_name = 'inscricao/list_inscricao.html'
     model = Inscricao
@@ -212,14 +213,15 @@ def inscricao_do(request,id_edital):
         inscricao.save()
         for pergunta in edital.pergunta_set.all():
             aux = request.POST.get('pergunta-' + str(pergunta.id))
-            resp = Resposta(inscricao=inscricao)
+            resp = Resposta(inscricao=inscricao, pergunta=pergunta)
 
             if pergunta.is_aberta:
                 resp.resposta_aberta = aux
             elif pergunta.has_arquivo:
                 nome_arq = 'arquivo-' + str(pergunta.id)
                 arq = request.FILES[nome_arq]
-                resp.arquivo = fs.save(arq.name, arq)
+                nome_save = 'inscricoes/'+arq.name
+                resp.arquivo = fs.save(nome_save, arq)
                 print(request.FILES)
 
             else:
