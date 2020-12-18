@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} {{edital.title}} {% endblock %}
+
+{% block content %}
+    <div class="row">
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Edital: {{inscricao.edital}}</th>
+                    <th>Situação: {{inscricao.get_status_display}}</th>
+
+                </tr>
+                <tr>
+                    <th>Nome: {{inscricao.user.first_name}} {{inscricao.user.last_name}}</th>
+                </tr>
+
+                <tr>
+                    <th>Pergunta</th>
+                    <th>Resposta</th>
+                </tr>
+        </thead>
+        <tbody>
+        {%for resp in inscricao.resposta_set.all%}
+            <tr>
+                <td>{{resp.pergunta}}</td>
+                {%if resp.pergunta.is_aberta%}
+                    <td>{{resp.resposta_aberta}}</td>
+                {%elif resp.pergunta.has_arquivo %}
+                    <td>
+                        <a href="/media/{{resp.arquivo }} " target='_blank'>Arquivo</a>
+
+                    </td>
+                {%else%}
+                    <td>{{resp.alternativa}}</td>
+                {%endif%}
+            </tr>
+        {% endfor %}
+        </tbody>
+
+        </table>
+    <a href="#" class="btn">Editar</a>
+
+    </div>
+
+{% endblock %}

@@ -210,6 +210,14 @@ def inscricao_view(request, id):
 
     return render(request,'inscricao/view_inscricao.html',context)
 
+def inscricao_view_user(request, id):
+    context = {}
+    inscricao= get_object_or_404(Inscricao, pk=id)
+
+    context['inscricao'] = inscricao
+
+    return render(request,'inscricao/view_inscricao_user.html',context)
+
 
 def inscricao_do(request,id_edital):
 

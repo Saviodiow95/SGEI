@@ -17,7 +17,7 @@
                     <div class="collapsible-body">
                         <p><span>Edital: {{insc.edital}}</span></p>
                         <p><span class="">Situação: {{insc.get_status_display}}</span></p>
-                        <a href="{}" class="btn right">Mais Detelhes</a>
+                        <a href="{% url 'editais:inscricao_view_user' insc.id %}" class="btn right">Mais Detelhes</a>
 
                     </div>
 
