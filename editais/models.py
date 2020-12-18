@@ -66,7 +66,7 @@ class Inscricao(models.Model):
     STATUS_CHOICE = (
         ('ap', 'Aprovado'),
         ('re', 'Reprovado'),
-        ('an', 'Analise'),
+        ('an', 'Em Analise'),
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)

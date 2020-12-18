@@ -27,5 +27,4 @@ def create_user_arquivo(request):
             user.password = make_password(aux[2])
             user.save()
 
-
     return render(request,'arquivos/cad.html',context)

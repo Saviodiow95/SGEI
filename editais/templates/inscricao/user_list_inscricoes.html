@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} Inscrições {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <h4>Suas inscrições</h4>
+
+        <ul class="collapsible popout">
+
+            {%for insc in incricoes%}
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{insc.edital}}</div>
+
+                    <div class="collapsible-body">
+                        <p><span>Edital: {{insc.edital}}</span></p>
+                        <p><span class="">Situação: {{insc.get_status_display}}</span></p>
+                        <a href="{}" class="btn right">Mais Detelhes</a>
+
+                    </div>
+
+
+                </li>
+            {%endfor%}
+
+
+
+
+        </ul>
+
+
+
+    </div>
+
+{% endblock %}

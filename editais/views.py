@@ -189,6 +189,19 @@ class InscricaolList(ListView):
     template_name = 'inscricao/list_inscricao.html'
     model = Inscricao
 
+def inscricao_list_user(request):
+    context ={}
+    incricoes = Inscricao.objects.filter(user=request.user)
+
+
+    context['incricoes'] = incricoes
+
+    return render(request, 'inscricao/user_list_inscricoes.html',context)
+
+
+
+
+
 def inscricao_view(request, id):
     context = {}
     inscricao= get_object_or_404(Inscricao, pk=id)
@@ -227,10 +240,9 @@ def inscricao_do(request,id_edital):
             else:
                 alt = Alternativa.objects.get(id=int(aux))
                 resp.alternativa = alt
-
-
             resp.save()
 
+        return redirect('editais:inscricao_list_user')
 
     return render(request, 'inscricao/do_inscricao.html', context)
 
