@@ -1,0 +1,40 @@
+{% extends 'relatorio.html' %} {% load static %} {% block title %} Relatorio{% endblock %} {% block content %}
+
+<br><br>
+<table border="1">
+    <thead>
+
+        <th rowspan="2" colspan="2"> <img src="/static/img/img.png" height="130px" width="240px"></th>
+        <th colspan="6"> Assistência Estudantil </th>
+        <tr>
+            <th colspan="6">Edital: {{edital.titulo}} </th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+
+            <th colspan="4">ALUNO</th>
+            <th colspan="4"> NIVEL DE CARÊNCIA </th>
+
+        </tr>
+
+        {% for insc in edital.inscricao_set.all%}
+        <tr>
+            <td colspan="4">{{insc.user}}</td>
+            <td colspan="4">{{insc.nivel}}</td>
+
+
+        </tr>
+        {%endfor%}
+
+
+
+
+
+
+
+    </tbody>
+
+</table>
+{% endblock %}

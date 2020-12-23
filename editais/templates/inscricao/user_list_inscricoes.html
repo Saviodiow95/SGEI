@@ -5,33 +5,66 @@
 {% block title %} Inscrições {% endblock %}
 
 {% block content %}
-    <div class="row">
-        <h4>Suas inscrições</h4>
+<div class="espacamento">
+    <div class="card-content">
+        <h4>Suas inscrições</h4> <br>
+        <div class="row">
+            <h6>Editais abertos</h6>
+            <ul class="collapsible">
+                {%for insc in incricoes%}
+                    {% if insc.edital.status == "ab"%}
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{insc.edital}}</div>
 
-        <ul class="collapsible popout">
+                        <div class="collapsible-body">
+                            <p><span>Edital: {{insc.edital}}</span></p>
+                            <p><span class="">Situação: {{insc.get_status_display}}</span></p>
+                            <a href="{% url 'editais:inscricao_view_user' insc.id %}" class="btn right">Mais Detelhes</a>
+                        </div>
+                    </li>
+                    {%endif%}
+                {%endfor%}
+            </ul>
 
-            {%for insc in incricoes%}
-                <li>
-                    <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{insc.edital}}</div>
+            <br><br><br>
+            <h6>Editais Em Analise</h6>
+            <ul class="collapsible">
+                {%for insc in incricoes%}
+                    {% if insc.edital.status == "em"%}
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{insc.edital}}</div>
 
-                    <div class="collapsible-body">
-                        <p><span>Edital: {{insc.edital}}</span></p>
-                        <p><span class="">Situação: {{insc.get_status_display}}</span></p>
-                        <a href="{% url 'editais:inscricao_view_user' insc.id %}" class="btn right">Mais Detelhes</a>
+                        <div class="collapsible-body">
+                            <p><span>Edital: {{insc.edital}}</span></p>
+                            <p><span class="">Situação: {{insc.get_status_display}}</span></p>
+                            <a href="{% url 'editais:inscricao_view_user' insc.id %}" class="btn right">Mais Detelhes</a>
+                        </div>
+                    </li>
+                    {%endif%}
+                {%endfor%}
+            </ul>
 
-                    </div>
+            <br><br><br>
+            <h6>Editais Fechados</h6>
+            <ul class="collapsible">
+                {%for insc in incricoes%}
+                    {% if insc.edital.status == "fn"%}
+                    <li>
+                        <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{insc.edital}}</div>
+
+                        <div class="collapsible-body">
+                            <p><span>Edital: {{insc.edital}}</span></p>
+                            <p><span class="">Situação: {{insc.get_status_display}}</span></p>
+                            <a href="{% url 'editais:inscricao_view_user' insc.id %}" class="btn right">Mais Detelhes</a>
+                        </div>
+                    </li>
+                    {%endif%}
+                {%endfor%}
+            </ul>
 
 
-                </li>
-            {%endfor%}
 
-
-
-
-        </ul>
-
-
-
+        </div>
     </div>
-
+</div>
 {% endblock %}

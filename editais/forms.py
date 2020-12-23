@@ -43,3 +43,10 @@ class InscricaoForm(forms.ModelForm):
     class Meta:
         model = Inscricao
         fields = '__all__'
+
+
+
+class IncricaoFormAv(forms.ModelForm):
+    class Meta:
+        model = Inscricao
+        fields = ('status',)

@@ -1,68 +1,106 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load material_form %}
+{% extends 'base.html' %} {% load static %} {% load material_form %} {% block title %} Editais {% endblock %} {% block content %}
+<div class="espacamento">
+    <div class="card-content">
+        <h4 class="title">Lista de Editais</h4>
+        <div class="row">
+            <a href="{% url 'editais:edital_add' %}" class="btn right blue">Novo Edital</a>
+        </div>
+        <div class="row">
 
-{% block title %} Editais {% endblock %}
+            <h5>Editais abertos</h5> <br>
+            <ul class="collapsible ">
+            {%for edital in editais_abertos%}
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{edital.titulo}}</div>
 
-{% block content %}
-    <div class="row">
-        <h4>Lista de Editais</h4>
-        <a href="{% url 'editais:edital_add' %}" class="btn right">Novo Edital</a>
+                    <div class="collapsible-body">
 
-
-
-        <table class="highlight centered">
-            <thead>
-              <tr>
-                  <th>Titulo</th>
-                  <th>descrição</th>
-                  <th>Incrições</th>
-                  <th>Status</th>
-                  <th>Opções</th>
-              </tr>
-            </thead>
-
-            <tbody>
-                {%for edital in edital_list%}
-                    <tr>
-
-
-                        <td>
-                            <a href="{% url 'editais:edital_view' edital.id %}">
-                                <span class="card-title">{{edital.titulo}}</span>
-                            </a>
-                        </td>
-                        <td> <p >{{edital.descricao|truncatewords:5}}</p> </td>
-                        <td> <p >{{edital.inscricao_set.count}}</p> </td>
-                        <td> <p >{{edital.get_status_display}}</p> </td>
-                        <td class="card-action">
-                            <a href="{% url 'editais:edital_edit' edital.id %}" class="btn btn-editar"><i class="material-icons">edit</i> Editar</a>&nbsp
-                            <a href="#modal_{{edital.id}}" class="modal-trigger btn btn-deletar"><i class="material-icons ">delete</i> Apagar</a>
-                        </td>
-
-
-
-
-                        <!-- Modal para confirmar a exclusão -->
-                        <div id="modal_{{edital.id}}" class="modal">
-                            <div class="modal-content">
-                                <h4>Deseja realmente excluir esse edital?</h4>
-                                <p>Titulo: <span>{{edital.titulo}}</span></p>
-                                <p>Descrição: <span>{{edital.descricao}}</span></p>
-
-                            </div>
-                            <div class="modal-footer">
-                                <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-                                <a href="{% url 'editais:edital_delete' edital.id %}" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
-                            </div>
+                        <div class="right">
+                            <a href="{% url 'editais:edital_edit' edital.id %}" class="btn btn-editar yellow  "><i  class="material-icons">edit</i> Editar</a>
+                            <a href="#modal_{{edital.id}}" class="modal-trigger btn btn-deletar red  "><i class="material-icons ">delete</i> Apagar</a>
                         </div>
 
+                        <span>Descrição: <p>{{edital.descricao|truncatewords:40}}</p>
+                        </span>
+                        <a href="{% url 'editais:edital_view' edital.id %}" class="btn right">Mais Detelhes</a>
+                    </div>
+                </li>
+            {%endfor%}
+            </ul>
+
+            <br>
+            <h5>Editais Em Analise</h5> <br>
+            <ul class="collapsible ">
+            {%for edital in editais_analise%}
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{edital.titulo}}</div>
+
+                    <div class="collapsible-body">
+
+                        <div class="right">
+                            <a href="{% url 'editais:edital_edit' edital.id %}" class="btn btn-editar yellow  "><i  class="material-icons">edit</i> Editar</a>
+                            <a href="#modal_{{edital.id}}" class="modal-trigger btn btn-deletar red  "><i class="material-icons ">delete</i> Apagar</a>
+                        </div>
+
+                        <span>Descrição: <p>{{edital.descricao|truncatewords:40}}</p>
+                        </span>
+                        <a href="{% url 'editais:edital_view' edital.id %}" class="btn right">Mais Detelhes</a>
+                    </div>
+                </li>
+            {%endfor%}
+            </ul>
+
+            <br>
+            <h5>Editais Fechados</h5> <br>
+            <ul class="collapsible ">
+            {%for edital in editais_fechados%}
+                <li>
+                    <div class="collapsible-header"><i class="material-icons">format_list_bulleted</i>{{edital.titulo}}</div>
+
+                    <div class="collapsible-body">
+
+                        <div class="right">
+                            <a href="{% url 'editais:edital_edit' edital.id %}" class="btn btn-editar yellow  "><i  class="material-icons">edit</i> Editar</a>
+                            <a href="#modal_{{edital.id}}" class="modal-trigger btn btn-deletar red  "><i class="material-icons ">delete</i> Apagar</a>
+                        </div>
+
+                        <span>Descrição: <p>{{edital.descricao|truncatewords:40}}</p>
+                        </span>
+                        <a href="{% url 'editais:edital_view' edital.id %}" class="btn right">Mais Detelhes</a>
+                    </div>
+                </li>
+                    <!-- Modal para confirmar a exclusão -->
+                    <div id="modal_{{edital.id}}" class="modal">
+                        <div class="modal-content">
+                            <h4>Deseja realmente excluir esse edital?</h4>
+                            <p>Titulo: <span>{{edital.titulo}}</span></p>
+                            <p>Descrição: <span>{{edital.descricao}}</span></p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
+                            <a href="{% url 'editais:edital_delete' edital.id %}" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
+                        </div>
+                    </div>
+            {%endfor%}
+            </ul>
 
 
-                    </tr>
-                {%endfor%}
-            </tbody>
-        </table>
+
+
+
+
+
+
+        </div>
+
     </div>
+</div>
+{% endblock %}
+
+{%block scripts%}
+
+  $(document).ready(function(){
+    $('.collapsible').collapsible();
+  });
 
 {% endblock %}

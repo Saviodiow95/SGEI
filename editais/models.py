@@ -1,5 +1,4 @@
 
-
 from django.db import models
 from accounts.models import User
 
@@ -45,7 +44,7 @@ class Pergunta(models.Model):
     class Meta:
         verbose_name_plural = "Pergunta"
         verbose_name = "Perguntas"
-    
+
 class Alternativa(models.Model):
     pergunta = models.ForeignKey(Pergunta, on_delete=models.CASCADE)
     descricao = models.TextField()
@@ -64,14 +63,15 @@ class Alternativa(models.Model):
 class Inscricao(models.Model):
 
     STATUS_CHOICE = (
-        ('ap', 'Aprovado'),
-        ('re', 'Reprovado'),
+        ('df', 'Defirido'),
+        ('in', 'Indefirido'),
         ('an', 'Em Analise'),
     )
 
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     edital = models.ForeignKey(Edital, on_delete=models.CASCADE)
     status = models.CharField(max_length=2, choices=STATUS_CHOICE, default='an')
+    nivel_vul = models.IntegerField(default=0)
 
     # ---- Campos para controle de datas de criação e edição ----
     created_at = models.DateTimeField(auto_now_add=True)
@@ -88,7 +88,8 @@ class Inscricao(models.Model):
                     resp.alternativa != None:
 
                 pontos += resp.alternativa.peso
-
+        self.nivel_vul = pontos
+        self.save()
         return pontos
 
 
@@ -99,6 +100,8 @@ class Inscricao(models.Model):
     class Meta:
         verbose_name_plural = "Inscrição"
         verbose_name = "Inscrições"
+        ordering = ["-nivel_vul",]
+
 
 class Resposta(models.Model):
     inscricao = models.ForeignKey(Inscricao, on_delete=models.CASCADE)

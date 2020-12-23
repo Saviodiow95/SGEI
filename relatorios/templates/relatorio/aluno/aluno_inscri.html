@@ -1,0 +1,57 @@
+{% extends 'relatorio.html' %}
+{% load static %}
+
+
+{% block title %} Relatorio{% endblock %}
+
+{% block content %}
+  
+  <br><br>
+<table border="1" >
+
+    <thead>
+            <tr>
+                <th colspan="2"> Assistência Estudantil </th>
+               
+            </tr>
+
+            <tr>
+            
+                
+                <td  style="text-align: center;"> <b>Edital: </b>  {{inscricao.edital}}</td>
+                <td  style="text-align: center;"> <b>Nivel de Vulnerabilidade: </b>  {{inscricao.nivel}} </td>
+           
+                
+            </tr>
+
+        </tr>
+        <tr>
+            <td colspan="2" style="text-align: center;"> <b>Nome: </b> {{inscricao.user.first_name}} {{inscricao.user.last_name}}</td>
+        </tr>
+
+        <tr>
+            <th>Pergunta:</th>
+            <th>Resposta:</th>
+        </tr>
+    </thead>
+    <tbody>
+        {%for resp in inscricao.resposta_set.all%}
+            <tr>
+                <td>{{resp.pergunta}}</td>
+                {%if resp.pergunta.is_aberta%}
+                    <td>{{resp.resposta_aberta}}</td>
+                {%elif resp.pergunta.has_arquivo %}
+                    <td>
+                        <a href="/media/{{resp.arquivo }} " target='_blank'>Arquivo</a>
+
+                    </td>
+                {%else%}
+                    <td>{{resp.alternativa}}</td>
+                {%endif%}
+            </tr>
+        {% endfor %}
+    </tbody>
+
+ 
+</table>
+ {% endblock %}

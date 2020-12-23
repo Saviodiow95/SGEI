@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} Editais {% endblock %}
+
+{% block content %}
+<div class="espacamento">
+    <div class="card-content">
+        <h4 class="title">Perfil</h4>
+        <div class="row">
+            <table>
+
+                <tbody>
+                    <tr>
+                        <th>Nome:</th>
+                        <td>{{user.first_name}} {{user.last_name}}</td>
+                        <th>Email:</th>
+                        <td>{{user.email}}</td>
+
+                    </tr>
+                </tbody>
+
+
+
+            </table>
+        </div>
+
+    </div>
+</div>
+{% endblock %}

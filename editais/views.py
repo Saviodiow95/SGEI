@@ -1,21 +1,34 @@
+from django.contrib.auth.decorators import login_required
 from django.forms import inlineformset_factory
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import DetailView, ListView
 
 from django.core.files.storage import FileSystemStorage
 
-from .forms import EditalForm, PerguntaForm, AlternativaForm
+from .forms import EditalForm, PerguntaForm, AlternativaForm, IncricaoFormAv
 from .models import Edital, Inscricao, Pergunta, Alternativa, Resposta
 
 
 #Edital área
 
 # administração
-class EditalListAdm(ListView):
-    template_name = 'edital/list_edital.html'
-    model = Edital
+
+@login_required
+def edital_list_adm(request):
+    context = {}
+    editais_abertos = Edital.objects.filter(status='ab')
+    editais_analise = Edital.objects.filter(status='em')
+    editais_fechados = Edital.objects.filter(status='fn')
 
 
+    context['editais_abertos'] = editais_abertos
+    context['editais_analise'] = editais_analise
+    context['editais_fechados'] = editais_fechados
+
+
+    return render(request,'edital/list_edital.html', context)
+
+@login_required
 def edital_view_adm(request, id):
     context = {}
     edital= get_object_or_404(Edital, pk=id)
@@ -24,6 +37,7 @@ def edital_view_adm(request, id):
     context['perguntas'] = perguntas
     return render(request,'edital/view_edital.html',context)
 
+@login_required
 def edital_add(request):
     edital = Edital()
     context = {}
@@ -49,6 +63,7 @@ def edital_add(request):
     return render(request,'edital/add_edital.html', context)
 
 
+@login_required
 def  edital_edit(request, id):
     context = {}
     edital = get_object_or_404(Edital, pk=id)
@@ -76,7 +91,7 @@ def  edital_edit(request, id):
     return render(request,'edital/add_edital.html', context)
 
 
-
+@login_required
 def edital_delete(request, id):
     edital = get_object_or_404(Edital, pk=id)
     edital.delete()
@@ -89,11 +104,50 @@ class EditalList(ListView):
     template_name = 'edital/list_edital_inscri.html'
     model = Edital
 
+
+
+def edital_list_aluno(request):
+    context = {}
+    editais_abertos = Edital.objects.filter(status='ab')
+    editais_analise = Edital.objects.filter(status='em')
+    editais_fechados = Edital.objects.filter(status='fn')
+
+    context['editais_abertos'] = editais_abertos
+    context['editais_analise'] = editais_analise
+    context['editais_fechados'] = editais_fechados
+
+    return render(request, 'edital/list_edital_inscri.html', context)
+
+
 def edital_view(request, id):
     context = {}
     edital= get_object_or_404(Edital, pk=id)
+
+    user = request.user
+    inscricao = Inscricao.objects.filter(user=user,edital=edital)
+
+    context['situacao'] = False
+
+    if inscricao:
+        context['situacao'] = True
+
+
     context['edital'] = edital
     return render(request,'edital/view_edital_inscri.html',context)
+
+
+
+def resultado_edital(request,id):
+    context = {}
+    edital = get_object_or_404(Edital, pk=id)
+    aprovados = Inscricao.objects.filter(edital=edital, status='df')
+    reprovados = Inscricao.objects.filter(edital=edital, status='in')
+
+
+    context['edital'] = edital
+    context['aprovados'] = aprovados
+    context['reprovados'] = reprovados
+    return render(request,'edital/resultado_edital.html',context)
 
 
 
@@ -102,7 +156,7 @@ def edital_view(request, id):
 
 
 #------------------- Perguntas ---------------------
-
+@login_required
 def pergunta_add(request, id_edital):
     form_alternativa_factory = inlineformset_factory(Pergunta, Alternativa, form=AlternativaForm)
 
@@ -137,7 +191,7 @@ def pergunta_add(request, id_edital):
 
     return render(request, 'pergunta/add_pergunta.html', context)
 
-
+@login_required
 def pergunta_edit(request, id):
     form_alternativa_factory = inlineformset_factory(Pergunta, Alternativa, form=AlternativaForm)
     pergunta = get_object_or_404(Pergunta, pk=id)
@@ -171,7 +225,7 @@ def pergunta_edit(request, id):
 
     return render(request, 'pergunta/edit_pergunta.html', context)
 
-
+@login_required
 def pergunta_delete(request, id):
     pergunta = get_object_or_404(Pergunta, pk=id)
     edital = pergunta.edital
@@ -188,7 +242,39 @@ def pergunta_delete(request, id):
 class InscricaolList(ListView):
     template_name = 'inscricao/list_inscricao.html'
     model = Inscricao
+@login_required
+def inscricao_list(request):
+    context={}
+    editais = Edital.objects.all()
 
+
+
+    search = request.GET.get('search')
+    status = request.GET.get('status')
+    id_edital = request.GET.get('edital')
+
+
+
+    if id_edital:
+        edital = get_object_or_404(Edital, pk=id_edital)
+        if status:
+            inscricao_list = Inscricao.objects.filter(status=status, edital=edital)
+        else:
+            inscricao_list = Inscricao.objects.filter(edital=edital)
+    else:
+        if status:
+            inscricao_list = Inscricao.objects.filter(status=status)
+        else:
+            inscricao_list = Inscricao.objects.all()
+
+
+    context['inscricao_list'] = inscricao_list
+    context['editais'] = editais
+
+    return render(request, 'inscricao/list_inscricao.html',context)
+
+
+@login_required
 def inscricao_list_user(request):
     context ={}
     incricoes = Inscricao.objects.filter(user=request.user)
@@ -201,15 +287,28 @@ def inscricao_list_user(request):
 
 
 
-
+@login_required
 def inscricao_view(request, id):
     context = {}
     inscricao= get_object_or_404(Inscricao, pk=id)
 
+
+    if request.method == 'POST':
+        form = IncricaoFormAv(request.POST or None, instance=inscricao)
+
+        if form.is_valid():
+            form.save()
+            return redirect('editais:inscricao_list')
+
+    else:
+        form = IncricaoFormAv(request.POST or None, instance=inscricao)
+
     context['inscricao'] = inscricao
+    context['form'] = form
 
     return render(request,'inscricao/view_inscricao.html',context)
 
+@login_required
 def inscricao_view_user(request, id):
     context = {}
     inscricao= get_object_or_404(Inscricao, pk=id)
@@ -219,6 +318,7 @@ def inscricao_view_user(request, id):
     return render(request,'inscricao/view_inscricao_user.html',context)
 
 
+@login_required
 def inscricao_do(request,id_edital):
 
     context = {}
@@ -243,7 +343,7 @@ def inscricao_do(request,id_edital):
                 arq = request.FILES[nome_arq]
                 nome_save = 'inscricoes/'+arq.name
                 resp.arquivo = fs.save(nome_save, arq)
-                print(request.FILES)
+
 
             else:
                 alt = Alternativa.objects.get(id=int(aux))
@@ -254,3 +354,42 @@ def inscricao_do(request,id_edital):
 
     return render(request, 'inscricao/do_inscricao.html', context)
 
+@login_required
+def inscricao_edit(request, id):
+    context={}
+    inscricao = get_object_or_404(Inscricao, pk=id)
+
+
+    if request.method == "POST":
+        fs = FileSystemStorage()
+        for resp in inscricao.resposta_set.all():
+            aux = request.POST.get('pergunta-' + str(resp.pergunta.id))
+
+
+            if resp.pergunta.is_aberta:
+                resp.resposta_aberta = aux
+            elif resp.pergunta.has_arquivo:
+                nome_arq = 'arquivo-' + str(resp.pergunta.id)
+                arq = request.FILES.get(nome_arq,None)
+                if arq:
+
+                    nome_save = 'inscricoes/' + arq.name
+                    resp.arquivo = fs.save(nome_save, arq)
+
+
+            else:
+                alt = Alternativa.objects.get(id=int(aux))
+                resp.alternativa = alt
+
+            resp.save()
+
+        return redirect('editais:inscricao_list_user')
+    else:
+
+        context['inscricao'] = inscricao
+
+
+
+
+
+    return render(request,'inscricao/edit_inscricao.html',context)

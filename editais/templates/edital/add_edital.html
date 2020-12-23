@@ -1,46 +1,27 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load material_form %}
+{% extends 'base.html'%} {% load static%} {% load material_form %} {%block title%} Novo Edital {%endblock%} {% block content %}
+<div class="row">
+    <div class="espacamento">
 
-{% block title %} Editais {% endblock %}
+        <form method="POST" method="post" enctype="multipart/form-data" class="col s12 ">
+            <div class="card-content">
+                <h4 class="title">Novo Edital</h4>
 
-{% block content %}
-    <div class="row ">
-        <h4 class="center">Novo Edital</h4>
-        <form method="post" enctype="multipart/form-data" class="col s12 ">
-            {% csrf_token %}
+                <div class="row">
+                    <div class="col s12">
+                        {% csrf_token %} {% form form=form %}{% endform %}
+                    </div>
 
-            {% form form=form %}{% endform %}
-
-
-            {{form_Perguntas.management_form}}
-
-            {% for pergunta in form_Perguntas%}
-                <div class="inlineform">
-                    {% form form=pergunta %}{% endform %}
-
+                    <div class="right">
+                        <a href="{% url 'editais:edital_list' %}" class="btn btn-deletar red">Cancelar</a>
+                        <button type="submit" class="btn btn-salvar green">Salvar</button>
+                    </div>
                 </div>
-            {%endfor %}
 
-            <br><br><br><br><br>
-            <div class="right">
-                <a href="{% url 'editais:edital_list' %}" class="btn btn-deletar">Cancelar</a>
-                <button type="submit" class="btn btn-salvar">Salvar</button>
-            </div>
+
 
         </form>
+        </div>
     </div>
 
-{% endblock %}
 
-{% block scripts %}
-    <script type="text/javascript">
-        $(function() {
-            $('.inlineform').formset({
-                prefix: '{{ form_Pergunta.prefix }}',
-                addText: '  <i class="material-icons">add</i> Adicionar novo Pergunta ',
-                deleteText: '  <br><i class="material-icons">remove</i> Remover este Pergunta',
-            });
-        })
-    </script>
-{% endblock scripts %}
+    {% endblock %}

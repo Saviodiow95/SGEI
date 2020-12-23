@@ -5,44 +5,50 @@
 {% block title %} Editais {% endblock %}
 
 {% block content %}
-    <div class="row ">
-        <h4 class="center">Nova Pergunta</h4>
+   <div class="espacamento">
+       <div class="card-content">
+        <h4 class="title">Alterar Pergunta</h4>
+           
+                <div class="row ">
+                    <form method="post" enctype="multipart/form-data" class="col s12 ">
+                        {% csrf_token %}
+                        <input type="hidden" name="edital_id" value="{{edital.id}}">
+                        <div class="row">
+                            <div class="input-field col s12 " >
+                                <input id="edital_titulo" type="text" name="edital_title" value="{{edital.titulo}}" readonly>
+                                <label for="edital_titulo">Edital</label>
 
-        <form method="post" enctype="multipart/form-data" class="col s12 ">
-            {% csrf_token %}
-            <input type="hidden" name="edital_id" value="{{edital.id}}">
-            <div class="row">
-                <div class="input-field col s12 " >
-                    <input id="edital_titulo" type="text" name="edital_title" value="{{edital.titulo}}" readonly>
-                    <label for="edital_titulo">Edital</label>
+                            </div>
+                        </div>
 
+                        <div class="row">
+                            <div class="input-field col s12 " >
+                                {% form form=form %}{% endform %}
+
+                            </div>
+                        </div>
+                        {{form_alternativa.management_form}}
+                        {% for alternativa in form_alternativa%}
+                        <div class="row">
+                            <div class="input-field col s12 " >
+                                <div class="inlineform">
+                                    {% form form=alternativa %}{% endform %}
+                                </div>
+                            </div>
+                        </div>
+                        {%endfor %}
+                        
+                            <div class="right">
+                                <a href="{% url 'editais:edital_view' edital.id%}"  class="btn red">Cancelar</a>
+                                <button type="submit" class="btn btn-salvar green">Salvar</button>
+                            </div>
+                            </form>
+                        <div>
+                 
                 </div>
             </div>
-
-
-
-            {% form form=form %}{% endform %}
-
-
-            {{form_alternativa.management_form}}
-
-            {% for alternativa in form_alternativa%}
-                <div class="inlineform">
-                    {% form form=alternativa %}{% endform %}
-
-                </div>
-            {%endfor %}
-
-
-            <br><br><br><br><br>
-            <div class="right">
-                <a href="{% url 'editais:edital_view' edital.id%}"  class="btn red">Cancelar</a>
-                <button type="submit" class="btn btn-salvar">Salvar</button>
-            </div>
-
-
-        </form>
-    </div>
+        </div>  
+   </div>
 
 {% endblock %}
 

@@ -5,13 +5,15 @@
 {% block title %} {{edital.title}} {% endblock %}
 
 {% block content %}
+<div class="espacamento">
     <div class="row">
+        <h4 class="title">Inscrição  Detalhada</h4>
 
-        <table>
+        <table  class="highlight  responsive-table">
             <thead>
                 <tr>
                     <th>Edital: {{inscricao.edital}}</th>
-                    <th>Nivel de Carência: {{inscricao.nivel}}</th>
+                    <th>Nivel de Vulnerabilidade: {{inscricao.nivel_vul}}</th>
 
                 </tr>
                 <tr>
@@ -19,8 +21,8 @@
                 </tr>
 
                 <tr>
-                    <th>Pergunta</th>
-                    <th>Resposta</th>
+                    <th>Pergunta:</th>
+                    <th>Resposta:</th>
                 </tr>
         </thead>
         <tbody>
@@ -42,8 +44,26 @@
         </tbody>
 
         </table>
-    <a href="#" class="btn">Imprimir</a>
+        <br><br><br>
+        <div class="row">
+            <span> Situação da Inscrição</span>
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="col">
+                    {% form form=form %}{% endform %}
+                </div>
+                <div class="col">
+                    <input type="submit" value="Avaliar" class=" btn btn-salvar">
+                </div>
+
+
+            </form>
+        </div>
+
+
+        <a href="{% url 'relatorios:inscricaodetalhada' inscricao.id%}" class="btn">Imprimir</a>
 
     </div>
-
+</div>
 {% endblock %}

@@ -1,21 +1,27 @@
 from django.urls import path, include
 
-from .views import EditalListAdm, EditalList, edital_view_adm, InscricaolList, edital_add, edital_delete, edital_edit, \
+from .views import EditalList, edital_view_adm, InscricaolList, edital_add, edital_delete, edital_edit, \
     inscricao_view, edital_view, \
-    pergunta_add, pergunta_edit, pergunta_delete, inscricao_do, inscricao_list_user, inscricao_view_user
+    pergunta_add, pergunta_edit, pergunta_delete, inscricao_do, inscricao_list_user, edital_list_adm, \
+    inscricao_view_user, edital_list_aluno, resultado_edital, inscricao_edit, inscricao_list
 
 app_name='editais'
 urlpatterns = [
 
     #----------------Edital-------------------
-    path('', EditalListAdm.as_view(), name='edital_list'),
+    path('', edital_list_adm, name='edital_list'),
     path('view/edital/<int:id>', edital_view_adm, name='edital_view'),
     path('add/edital/', edital_add, name="edital_add"),
     path('edit/edital/<int:id>', edital_edit, name="edital_edit"),
     path('delete/edital/<int:id>', edital_delete, name='edital_delete'),
 
-    path('alunos/edital/list/', EditalList.as_view(), name='edital_list_inscri'),
+    path('alunos/edital/list/', edital_list_aluno, name='edital_list_inscri'),
     path('alunos/edital/<int:id>', edital_view, name='edital_view_inscri'),
+
+
+    path('resultado/edital/<int:id>', resultado_edital, name='resultado_edital'),
+
+
 
 
     #----------------Pergunta-------------------
@@ -25,11 +31,12 @@ urlpatterns = [
 
 
     #----------------Incrições-------------------
-    path('inscricao/', InscricaolList.as_view(), name='inscricao_list'),
+    path('inscricao/', inscricao_list, name='inscricao_list'),
     path('view/inscricao/<int:id>', inscricao_view, name='inscricao_view'),
     path('alunos/inscricao/<int:id>', inscricao_view_user, name='inscricao_view_user'),
     path('alunos/inscricao/', inscricao_list_user, name='inscricao_list_user'),
 
 
     path('inscricao/do/<int:id_edital>', inscricao_do, name='inscricao_do'),
+    path('inscricao/edit/<int:id>', inscricao_edit, name='inscricao_edit'),
 ]

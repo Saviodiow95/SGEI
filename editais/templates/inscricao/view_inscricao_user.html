@@ -2,7 +2,7 @@
 {% load static %}
 {% load material_form %}
 
-{% block title %} {{edital.title}} {% endblock %}
+{% block title %} Inscrição {% endblock %}
 
 {% block content %}
     <div class="row">
@@ -10,39 +10,46 @@
         <table>
             <thead>
                 <tr>
-                    <th>Edital: {{inscricao.edital}}</th>
-                    <th>Situação: {{inscricao.get_status_display}}</th>
+                    <th colspan="3">Edital: {{inscricao.edital}}</th>
+                    <th colspan="2">Situação: {{inscricao.get_status_display}}</th>
 
                 </tr>
                 <tr>
-                    <th>Nome: {{inscricao.user.first_name}} {{inscricao.user.last_name}}</th>
+                    <th colspan="5">Nome: {{inscricao.user.first_name}} {{inscricao.user.last_name}}</th>
                 </tr>
 
                 <tr>
-                    <th>Pergunta</th>
-                    <th>Resposta</th>
+                    <th colspan="3">Pergunta</th>
+                    <th colspan="2">Resposta</th>
                 </tr>
         </thead>
         <tbody>
         {%for resp in inscricao.resposta_set.all%}
             <tr>
-                <td>{{resp.pergunta}}</td>
+                <td colspan="3">{{resp.pergunta}}</td>
                 {%if resp.pergunta.is_aberta%}
-                    <td>{{resp.resposta_aberta}}</td>
+                    <td colspan="2">{{resp.resposta_aberta}}</td>
                 {%elif resp.pergunta.has_arquivo %}
-                    <td>
+                    <td colspan="2">
                         <a href="/media/{{resp.arquivo }} " target='_blank'>Arquivo</a>
 
                     </td>
                 {%else%}
-                    <td>{{resp.alternativa}}</td>
+                    <td colspan="2">{{resp.alternativa}}</td>
                 {%endif%}
             </tr>
         {% endfor %}
         </tbody>
 
         </table>
-    <a href="#" class="btn">Editar</a>
+
+        {%if inscricao.edital.status == "ab"%}
+            <a href="{% url 'editais:inscricao_edit' inscricao.id%}" class="btn">Editar</a>
+        {%elif inscricao.edital.status == "fn"%}
+            <a href="{% url 'editais:resultado_edital' inscricao.edital.id%}" class="btn button blue">Resultados</a>
+
+        {%endif%}
+
 
     </div>
 

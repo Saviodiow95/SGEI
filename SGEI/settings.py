@@ -46,11 +46,14 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "material",
     'material.frontend',
+    'materializecssform',
+
 
     #local
     "accounts",
     "core",
     "editais",
+    "relatorios",
 
 ]
 
@@ -77,6 +80,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -155,7 +159,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 SITE_ID = 1
 EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
-LOGIN_REDIRECT_URL = "/"
+LOGIN_URL= '/accounts/login'
+LOGIN_REDIRECT_URL = "/index/"
 ACCOUNT_SESSION_REMEMBER = True
 ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
 ACCOUNT_USERNAME_REQUIRED = False

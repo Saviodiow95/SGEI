@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load material_form %}
+
+{% block title %} {{edital.title}} {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col s12">
+        <h1> Resultado edital {{edital.titulo}}</h1>
+    </div>
+    <div class="col s12">
+        <table>
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+        {% for insc in aprovados%}
+                <tr>
+                    <td>
+                    {{insc.user.first_name}}
+                    </td>
+                    <td>
+                        Classificado
+                    </td>
+                </tr>
+
+
+        {%endfor%}
+        {% for insc in reprovados%}
+            <tr>
+                <td>
+                    {{insc.user.first_name}}
+                </td>
+                <td>
+                    Não Classificado
+                </td>
+            </tr>
+        {%endfor%}
+            </tbody>
+        </table>
+
+
+
+
+    </div>
+
+
+
+
+
+
+</div>
+
+
+
+{% endblock %}

@@ -6,10 +6,45 @@
 
 {% block content %}
     <div class="row">
+        <div class="row">
+            <div class="row">
+                <span>Filtrar por:</span>
+            </div>
+
+            <div class="col s12 m4">
+                <label for="edital">Edital</label>
+                <select name="edital" id="edital" class="form-control">
+                    <option value="">Escolha uma opção...</option>
+                    {% for edital in editais %}
+                        <option value="{{edital.id}}">{{edital.titulo}}</option>
+                    {% endfor %}
+                </select>
+            </div>
+
+
+
+
+
+            <div class="col s12 m4">
+                <label for="status">Status</label>
+                <select name="status" id="status" class="form-control">
+                    <option value="">Escolha uma opção...</option>
+                    <option value="df">Inscrições deferidas</option>
+                    <option value="in">Inscrições indeferidas </option>
+                    <option value="an">Inscrições em Analise </option>
+                </select>
+            </div>
+
+            <a href="{% url 'editais:inscricao_list'%}" class="btn">Limpar</a>
+        </div>
+
+
+
+
         <table class="striped responsive-table" >
             <thead>
               <tr>
-                  <th>Id</th>
+
                   <th>Aluno</th>
                   <th>Edital</th>
                   <th>Situação</th>
@@ -20,16 +55,16 @@
             <tbody>
             {%for inscricao in inscricao_list%}
                  <tr>
-                     <td>{{inscricao.id}}</td>
+
                      <td>{{inscricao.user.first_name}}</td>
                      <td>{{inscricao.edital.titulo}}</td>
                      {%if inscricao.status == "an"%}
                         <td class = " yellow accent-2">{{inscricao.get_status_display}}</td>
                      {%endif%}
-                     {%if inscricao.status == "ap"%}
+                     {%if inscricao.status == "df"%}
                         <td class=" teal lighten-1">{{inscricao.get_status_display}}</td>
                      {%endif%}
-                     {%if inscricao.status == "re"%}
+                     {%if inscricao.status == "in"%}
                         <td class = " red darken-3">{{inscricao.get_status_display}}</td>
                      {%endif%}
                      <td>{{inscricao.nivel}}</td>
@@ -38,6 +73,39 @@
             {%endfor%}
             </tbody>
         </table>
+
     </div>
+
+{% endblock %}
+
+
+{% block scripts %}
+$( document ).ready(function() {
+
+    var baseUrl   = "/editais/inscricao/";
+    var searchBtn = $('#search-btn');
+    var searchForm = $('#search-form');
+    var status     = $('#status');
+    var edital     = $('#edital');
+
+
+    $(searchBtn).on('click', function() {
+        searchForm.submit();
+    });
+
+    $(status).change(function() {
+        var status = $(this).val();
+        window.location.href = baseUrl + '?status=' + status;
+    });
+
+    $(edital).change(function() {
+        var edital = $(this).val();
+        window.location.href = baseUrl + '?edital=' + edital;
+    });
+
+});
+
+
+
 
 {% endblock %}

@@ -5,12 +5,13 @@
 {% block title %} Cadastro de usuarios {% endblock %}
 
 {% block content %}
-    <div class="card">
-        <span class="card-title">Cadastro de usuarios em massa</span>
-
-        <div class="card-content">
-            <form method="post" enctype="multipart/form-data" >
-                {%csrf_token%}
+<div class="espacamento">
+    <div class="row">
+        <h4 class="title">Cadastro de usuarios em massa</h4>
+       
+            <form method="post" enctype="multipart/form-data" class="col s12" >
+                <div class="row">
+                    {%csrf_token%}
                      <label for="arquivo">Faça o upload do arquivo com a lista de usuarios</label>
                      <label for="arquivo">
                          Os dados do arquivo devem estar na seguinte ondem<br>
@@ -30,13 +31,15 @@
 
                     </div>
 
-                <a href="#" class="btn btn-deletar ">Cancelar</a>
-                <button type="submit" class="btn btn-salvar " >Carregar</button>
-
+                    <div class="right">
+                        <a href="#" class="btn btn-deletar red ">Cancelar</a>
+                        <button type="submit" class="btn btn-salvar blue" >Carregar</button>
+                    </div>
+                </div>      
             </form>
+        
         </div>
-
-    </div>
-
+    
+</div>
 
 {% endblock %}
