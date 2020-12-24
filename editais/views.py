@@ -123,13 +123,14 @@ def edital_view(request, id):
     context = {}
     edital= get_object_or_404(Edital, pk=id)
 
-    user = request.user
-    inscricao = Inscricao.objects.filter(user=user,edital=edital)
+    if request.user.is_anonymous == False:
+        user = request.user
+        inscricao = Inscricao.objects.filter(user=user,edital=edital)
 
-    context['situacao'] = False
+        context['situacao'] = False
 
-    if inscricao:
-        context['situacao'] = True
+        if inscricao:
+            context['situacao'] = True
 
 
     context['edital'] = edital
@@ -320,10 +321,18 @@ def inscricao_view_user(request, id):
 
 @login_required
 def inscricao_do(request,id_edital):
-
     context = {}
     respostas = {}
     edital = get_object_or_404(Edital, pk=id_edital)
+
+    user = request.user
+    test = Inscricao.objects.filter(user=user, edital=edital)
+
+    if test:
+        return redirect('editais:inscricao_list_user')
+
+
+
     context['edital'] = edital
     inscricao = Inscricao()
     inscricao.edital = edital

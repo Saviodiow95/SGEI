@@ -25,6 +25,18 @@
                         <a href="{% url 'editais:edital_view' edital.id %}" class="btn right">Mais Detelhes</a>
                     </div>
                 </li>
+                <!-- Modal para confirmar a exclusão -->
+                <div id="modal_{{edital.id}}" class="modal">
+                    <div class="modal-content">
+                        <h4>Deseja realmente excluir esse edital?</h4>
+                        <p>Titulo: <span>{{edital.titulo}}</span></p>
+                        <p>Descrição: <span>{{edital.descricao}}</span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect btn-editar btn-flat">Cancelar</a>
+                        <a href="{% url 'editais:edital_delete' edital.id %}" class="modal-close waves-effect btn-deletar btn-flat">Confirmar</a>
+                    </div>
+                </div>
             {%endfor%}
             </ul>
 
@@ -47,6 +59,17 @@
                         <a href="{% url 'editais:edital_view' edital.id %}" class="btn right">Mais Detelhes</a>
                     </div>
                 </li>
+                <!-- Modal para confirmar a exclusão -->
+                <div id="modal_{{edital.id}}" class="modal">
+                    <div class="modal-content">
+                        <h4>Deseja realmente excluir esse edital?</h4>
+                        <p>Titulo: <span>{{edital.titulo}}</span></p>
+                        <p>Descrição: <span>{{edital.descricao}}</span></p>
+                    </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect btn-editar btn-flat">Cancelar</a>
+                        <a href="{% url 'editais:edital_delete' edital.id %}" class="modal-close waves-effect btn-deletar btn-flat">Confirmar</a> </div>
+                </div>
             {%endfor%}
             </ul>
 
@@ -69,18 +92,18 @@
                         <a href="{% url 'editais:edital_view' edital.id %}" class="btn right">Mais Detelhes</a>
                     </div>
                 </li>
-                    <!-- Modal para confirmar a exclusão -->
-                    <div id="modal_{{edital.id}}" class="modal">
-                        <div class="modal-content">
-                            <h4>Deseja realmente excluir esse edital?</h4>
-                            <p>Titulo: <span>{{edital.titulo}}</span></p>
-                            <p>Descrição: <span>{{edital.descricao}}</span></p>
-                        </div>
-                        <div class="modal-footer">
-                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Cancelar</a>
-                            <a href="{% url 'editais:edital_delete' edital.id %}" class="modal-close waves-effect waves-green btn-flat">Confirmar</a>
-                        </div>
+                <!-- Modal para confirmar a exclusão -->
+                <div id="modal_{{edital.id}}" class="modal">
+                    <div class="modal-content">
+                        <h4>Deseja realmente excluir esse edital?</h4>
+                        <p>Titulo: <span>{{edital.titulo}}</span></p>
+                        <p>Descrição: <span>{{edital.descricao}}</span></p>
                     </div>
+                    <div class="modal-footer">
+                        <a href="#!" class="modal-close waves-effect btn-editar btn-flat">Cancelar</a>
+                        <a href="{% url 'editais:edital_delete' edital.id %}" class="modal-close waves-effect btn-deletar btn-flat">Confirmar</a>
+                    </div>
+                </div>
             {%endfor%}
             </ul>
 
@@ -101,6 +124,8 @@
 
   $(document).ready(function(){
     $('.collapsible').collapsible();
+    $('.modal').modal();
   });
+
 
 {% endblock %}
