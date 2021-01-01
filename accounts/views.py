@@ -20,7 +20,7 @@ def create_user_arquivo(request):
     if (request.method == 'POST'):
 
         arq = request.FILES['arquivo']
-        print(arq)
+
 
         fs.save('accounts/' + arq.name, arq)
 

@@ -43,13 +43,13 @@
 </div>
 </div>
 {% endblock %} {% block scripts %}
-<script type="text/javascript">
+
     $(function() {
         $('.inlineform').formset({
             prefix: '{{ form_Pergunta.prefix }}',
             addText: '<br><br><i class="material-icons">add</i> Adicionar nova Alternativa ',
-            deleteText: '  <br><i class="material-icons">delete</i> Remover esta alternativa',
+            deleteText: '<br><i class="material-icons">delete</i> Remover esta alternativa',
         });
     })
-</script>
+
 {% endblock scripts %}

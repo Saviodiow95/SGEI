@@ -81,9 +81,9 @@ class Inscricao(models.Model):
         respostas = list(self.resposta_set.all())
 
         pontos = 0
-        print(respostas)
+
         for resp in respostas:
-            print(resp)
+
             if resp.alternativa != None  and \
                     resp.alternativa != None:
 
