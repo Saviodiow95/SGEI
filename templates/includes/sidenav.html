@@ -1,94 +1,7 @@
 {% if request.user.is_staff %}
 
-     <ul id="slide-out" class="sidenav sidenav-fixed green darken-4 menu" >
-            
-        <li>
-
-            <h5 class="white-text center-align "><b>SGEI</b> <sup>IFNMG</sup></h5>
-
-            <div class="user-view">
-
-
-                {% if user.is_authenticated %} {% if user.foto %}
-
-                <a href="#user" ><img class="circle" src="/media/{{user.foto}} "></a>
-
-                {% else %}
-
-                <a href="#user " ><img class="circle " src="/static/img/user.png " ></a>
-            
-                {% endif %}
-
-                <a href="{%url 'accounts:perfil_user'%} "><span class="white-text name "> Olá, {{user.username}}</span></a>
-                <a href="#email "><span class="white-text email ">{{user.first_name}}</span></a>
-                
-                <a href="#email " class="z-depth-0 dropdown-trigger white-text " data-target="menu-sair ">
-                <span class="white-text email "><i class="material-icons right ">arrow_drop_down</i>{{user.email}}</span> </a> {% else %}
-                
-                <a href="#user " style="align-items: center; "><img class="circle " src="/static/img/user.png "></a>
-                <a href="#name "><span class="white-text name ">SGEI</span></a>
-                <a href="{% url 'account_login' %} "><span class="white-text email ">Entrar</span></a> {% endif %}
-
-            </div>
-        </li>
-
-
-        <li class="nav-link ">
-            <a href="{% url 'core:index'%} " class="z-depth-0 white-text ">
-                <i class="material-icons white-text ">home</i> Inicio
-            </a>
-        </li>
-        
-        <li class="nav-link ">
-            <a href="# " class="dropdown-trigger white-text " data-target="menuedital-mobile ">
-                <i class="material-icons white-text ">content_paste</i> Editais
-            </a>
-        </li>
-        <li class="nav-link ">
-            <a href="# " class="dropdown-trigger white-text " data-target="menuinscricao-mobile ">
-                <i class="material-icons white-text ">library_books</i> Inscrições
-            </a>
-        </li>
-        <li class="nav-link ">
-            <a href="# " class="dropdown-trigger white-text " data-target="menuusuario-mobile ">
-                <i class="material-icons white-text ">supervisor_account</i> Usuarios
-            </a>
-        </li>
-
-    </ul>
-
-    <!--     menu -->
-        
-        <ul id="menu-sair " class="dropdown-content menu-dropdown ">
-            <li><a href="{% url 'core:mylogout'%} ">Sair</a></li>
-            
-        </ul>
-        
-        <ul id="menuinscricao-mobile " class="dropdown-content menu-dropdown ">
-            
-            <li><a href="{% url 'editais:inscricao_list'%} ">Listar inscrições</a></li>
-        
-        
-        </ul>
-        <ul id="menuusuario-mobile " class=" dropdown-content menu-dropdown ">
-            <li><a href=" {% url 'accounts:create_user_arquivo' %}">Adicionar Usuario</a></li>
-            <li><a href=" {% url 'accounts:list_user' %} ">Listar Usuarios</a></li>
-        
-        </ul>
-        
-        <ul id="menuedital-mobile " class="dropdown-content menu-dropdown ">
-            <li><a href="{% url 'editais:edital_add' %} ">Adicionar Edital</a></li>
-            <li><a href="{% url 'editais:edital_list'%} ">Listar Editais</a></li>
-        
-        
-        </ul>
-<br>
-<div class="container">  <a href="#" data-target="slide-out" class="sidenav-trigger hide-on-large-only "><i class="material-icons">menu</i></a> </div>
-
-{% else %}
-
 <ul id="slide-out" class="sidenav sidenav-fixed green darken-4 menu">
-    
+
     <li>
 
         <h5 class="white-text center-align "><b>SGEI</b> <sup>IFNMG</sup></h5>
@@ -98,20 +11,108 @@
 
             {% if user.is_authenticated %} {% if user.foto %}
 
-            <a href="#user" ><img class="circle" src="/media/{{user.foto}} "></a>
+            <a href="#user"><img class="circle" src="/media/{{user.foto}} "></a>
 
             {% else %}
 
-            <a href="#user "  ><img class="circle " src="/static/img/user.png " ></a>
-        
+            <a href="#user "><img class="circle " src="/static/img/user.png "></a>
+
             {% endif %}
 
-            <a href="{%url 'accounts:perfil_user'%} "><span class="white-text name "> Olá, {{user.username}}</span></a>
-            
-            
-            <a href="#email " class="z-depth-0 dropdown-trigger white-text " data-target="menusair-Usuario ">
-            <span class="white-text email ">{{user.email}}</span> </a> {% else %}
-            
+            <a href="# " class="z-depth-0 dropdown-trigger white-text " data-target="menu-sair "><span class="white-text name "> Olá, {{user.username}}<i class="material-icons right ">arrow_drop_down</i></span></a>
+            <a href="#email "><span class="white-text email ">{{user.first_name}}</span></a>
+
+            <a href="#email ">
+                <span class="white-text email ">{{user.email}}</span> </a> {% else %}
+
+            <a href="#user " style="align-items: center; "><img class="circle " src="/static/img/user.png "></a>
+            <a href="#name "><span class="white-text name ">SGEI</span></a>
+            <a href="{% url 'account_login' %} "><span class="white-text email ">Entrar</span></a> {% endif %}
+
+        </div>
+    </li>
+
+
+    <li class="nav-link ">
+        <a href="{% url 'core:index'%} " class="z-depth-0 white-text ">
+            <i class="material-icons white-text ">home</i> Inicio
+        </a>
+    </li>
+
+    <li class="nav-link ">
+        <a href="# " class="dropdown-trigger white-text " data-target="menuedital-mobile ">
+            <i class="material-icons white-text ">content_paste</i> Editais
+        </a>
+    </li>
+    <li class="nav-link ">
+        <a href="# " class="dropdown-trigger white-text " data-target="menuinscricao-mobile ">
+            <i class="material-icons white-text ">library_books</i> Inscrições
+        </a>
+    </li>
+    <li class="nav-link ">
+        <a href="# " class="dropdown-trigger white-text " data-target="menuusuario-mobile ">
+            <i class="material-icons white-text ">supervisor_account</i> Usuarios
+        </a>
+    </li>
+
+</ul>
+
+<!--     menu -->
+
+<ul id="menu-sair " class="dropdown-content menu-dropdown ">
+    <li><a href="{%url 'accounts:perfil_user'%} ">´Perfil</a></li>
+    <li><a href="{% url 'core:mylogout'%} ">Sair</a></li>
+
+</ul>
+
+<ul id="menuinscricao-mobile " class="dropdown-content menu-dropdown ">
+
+    <li><a href="{% url 'editais:inscricao_list'%} ">Listar inscrições</a></li>
+
+
+</ul>
+<ul id="menuusuario-mobile " class=" dropdown-content menu-dropdown ">
+    <li><a href=" {% url 'accounts:create_user_arquivo' %}">Adicionar Usuario</a></li>
+    <li><a href=" {% url 'accounts:list_user' %} ">Listar Usuarios</a></li>
+
+</ul>
+
+<ul id="menuedital-mobile " class="dropdown-content menu-dropdown ">
+    <li><a href="{% url 'editais:edital_add' %} ">Adicionar Edital</a></li>
+    <li><a href="{% url 'editais:edital_list'%} ">Listar Editais</a></li>
+
+
+</ul>
+<br>
+<div class="container"> <a href="#" data-target="slide-out" class="sidenav-trigger hide-on-large-only "><i class="material-icons">menu</i></a> </div>
+
+{% else %}
+
+<ul id="slide-out" class="sidenav sidenav-fixed green darken-4 menu">
+
+    <li>
+
+        <h5 class="white-text center-align "><b>SGEI</b> <sup>IFNMG</sup></h5>
+
+        <div class="user-view">
+
+
+            {% if user.is_authenticated %} {% if user.foto %}
+
+            <a href="#user"><img class="circle" src="/media/{{user.foto}} "></a>
+
+            {% else %}
+
+            <a href="#user "><img class="circle " src="/static/img/user.png "></a>
+
+            {% endif %}
+
+            <a href="#" class="z-depth-0 dropdown-trigger white-text " data-target="menusair-Usuario "><span class="white-text name "> Olá, {{user.username}}<i class="material-icons right ">arrow_drop_down</i></span></a>
+
+
+            <a href="#email">
+                <span class="white-text email ">{{user.email}}</span> </a> {% else %}
+
             <a href="#user " style="align-items: center; "><img class="circle " src="/static/img/user.png "></a>
             <a href="#name "><span class="white-text name ">SGEI</span></a>
             <a href="{% url 'account_login' %} "><span class="white-text email ">Entrar</span></a> {% endif %}
@@ -134,28 +135,29 @@
             <i class="material-icons white-text ">library_books</i> Inscrições
         </a>
     </li>
-   
+
 </ul>
 
 
 <br>
-<div class="container">  <a href="#" data-target="slide-out" class="sidenav-trigger hide-on-large-only "><i class="material-icons">menu</i></a> </div>
+<div class="container"> <a href="#" data-target="slide-out" class="sidenav-trigger hide-on-large-only "><i class="material-icons">menu</i></a> </div>
 
 
 <ul id="menuinscricao-Usuario " class="dropdown-content menu-dropdown ">
-            
-<li><a href="{% url 'editais:inscricao_list_user' %} ">Listar inscrições</a></li>
+
+    <li><a href="{% url 'editais:inscricao_list_user' %} ">Listar inscrições</a></li>
 
 </ul>
 
 <ul id="menuedital-Usuario " class="dropdown-content menu-dropdown ">
-        
-<li><a href="{% url 'editais:edital_list_inscri'%} ">Listar Editais</a></li>
+
+    <li><a href="{% url 'editais:edital_list_inscri'%} ">Listar Editais</a></li>
 
 </ul>
 <ul id="menusair-Usuario " class="dropdown-content menu-dropdown ">
+    <li><a href="{%url 'accounts:perfil_user'%}">Perfil</a></li>
     <li><a href="{% url 'core:mylogout'%} ">Sair</a></li>
-    
+
 </ul>
 
 {%endif%}

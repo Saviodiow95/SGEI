@@ -1,10 +1,4 @@
-{% extends 'base.html' %}
-{% load static %}
-{% load material_form %}
-
-{% block title %} Lista de usuarios {% endblock %}
-
-{% block content %}
+{% extends 'base.html' %} {% load static %} {% load material_form %} {% block title %} Lista de usuarios {% endblock %} {% block content %}
 <div class="espacamento">
     <div class="card-content">
         <h4 class="title">Lista de usuarios</h4>
@@ -12,19 +6,19 @@
             <table>
                 <thead>
                     <tr>
-                        <td>Nome</td>
-                        <td>Username</td>
-                        <td>email</td>
+                        <td><b>Nome</b></td>
+                        <td><b>Username</b></td>
+                        <td><b>Email</b></td>
                     </tr>
                 </thead>
                 <tbody>
-                {% for user in list_user %}
-                <tr>
-                    <td>{{user.first_name}} {{last_name}}</td>
-                    <td>{{user.username}}</td>
-                    <td>{{user.email}}</td>
-                </tr>
-                {% endfor %}
+                    {% for user in list_user %}
+                    <tr>
+                        <td>{{user.first_name}} {{last_name}}</td>
+                        <td>{{user.username}}</td>
+                        <td>{{user.email}}</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
         </div>

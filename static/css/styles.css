@@ -11,15 +11,18 @@ footer {
         padding-left: 0;
     }
 }
-nav.navbar{
+
+nav.navbar {
     background-color: transparent !important;
     box-shadow: none;
 }
+
 .top-right {
     position: absolute;
     right: 10px;
     top: 18px;
 }
+
 
 /* Logo*/
 
@@ -39,31 +42,26 @@ nav.navbar{
 
 /*Botões*/
 
-.btn{
+.btn {
     margin: 10px;
     font-weight: bold;
-
 }
 
-.btn-editar{
+.btn-editar {
     background-color: #ffeb3b;
-
 }
 
-.btn-deletar{
+.btn-deletar {
     background-color: #f44336;
-
 }
 
-.btn-salvar{
-
-    background-color: #4caf50 ;
-}
-.btn-novo{
-
-    background-color: #039be5 ;
+.btn-salvar {
+    background-color: #4caf50;
 }
 
+.btn-novo {
+    background-color: #039be5;
+}
 
 footer {
     margin-top: 100px;
@@ -172,4 +170,9 @@ i.medium.icon {
 
 #icon {
     border-radius: 10px;
+}
+
+.navbar.bar {
+    background-color: transparent !important;
+    box-shadow: none;
 }
